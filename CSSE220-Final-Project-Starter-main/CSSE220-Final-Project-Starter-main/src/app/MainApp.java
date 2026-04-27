@@ -7,7 +7,7 @@ import model.GameModel;
 
 /**
  * MainApp starts the program
- * @author Put your team name here
+ * @author Put your team name here: Minika and Lily 
  */
 public class MainApp {
 	
