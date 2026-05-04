@@ -9,14 +9,18 @@ import javax.imageio.ImageIO;
 public class Player {
 	private int row;
 	private int col;
+	private int startRow;
+	private int startCol;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	
 	public Player(int row, int col) {
 		this.row = row;
 		this.col = col;
+		this.startRow = row;
+		this.startCol = col;
 		try {
-			sprite = ImageIO.read(Player.class.getResource("tennis.png"));
+			sprite = ImageIO.read(Player.class.getResource("Player.png"));
 		} catch (IOException | IllegalArgumentException e) {
 			sprite = null;
 		}
@@ -50,6 +54,11 @@ public class Player {
 		else if (dRow < 0) {
 			this.col = col+dCol;
 		}
+	}
+	
+	public void reset() {
+		this.row = startRow;
+		this.col = startCol;
 	}
 	
 }
