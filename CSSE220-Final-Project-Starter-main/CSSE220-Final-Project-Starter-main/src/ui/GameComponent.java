@@ -27,7 +27,7 @@ public class GameComponent extends JComponent {
 	// Minimal placeholder to test  it’s running
 	g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
 
-
+	model.getPlayer().drawOn(g2);
 	// TODO: draw based on model state
 	}
 }

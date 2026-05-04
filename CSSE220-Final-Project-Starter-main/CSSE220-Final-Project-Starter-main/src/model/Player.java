@@ -43,22 +43,19 @@ public class Player {
 	
 	public void moveBy(int dRow, int dCol) {
 		if (dRow > 0) {
-			this.row = row-dRow;
+			this.row = row-Math.abs(dRow);
 		}
 		else if (dRow < 0) {
-			this.row = row+dRow;
+			this.row = row+Math.abs(dRow);
 		}
 		if (dCol > 0) {
-			this.col = col-dCol;
+			this.col = col-Math.abs(dCol);
 		}
-		else if (dRow < 0) {
-			this.col = col+dCol;
+		else if (dCol < 0) {
+			this.col = col+Math.abs(dCol);
 		}
 	}
 	
-	public void reset() {
-		this.row = startRow;
-		this.col = startCol;
-	}
+	
 	
 }
