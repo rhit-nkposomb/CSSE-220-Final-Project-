@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -37,8 +38,14 @@ public class Player {
 	public void drawOn(Graphics2D g2) {
 		int x = this.col * TILE_SIZE;
 		int y = this.row * TILE_SIZE;
-
+		
+		if (sprite!= null) {
 		g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		}
+		else {
+			g2.setColor(Color.MAGENTA);
+			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		}
 	}
 	
 	public void moveBy(int dRow, int dCol) {

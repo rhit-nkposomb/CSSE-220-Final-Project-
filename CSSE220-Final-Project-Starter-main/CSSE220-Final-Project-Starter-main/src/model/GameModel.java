@@ -19,6 +19,8 @@ public class GameModel {
 		this.player = new Player(5,5);
 		
 		
+		
+		
 	}
 
 	public Player getPlayer() {

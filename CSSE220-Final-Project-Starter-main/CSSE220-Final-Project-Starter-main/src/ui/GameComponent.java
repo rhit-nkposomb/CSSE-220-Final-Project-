@@ -2,20 +2,31 @@ package ui;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import model.GameModel;
+import model.Player;
 
 public class GameComponent extends JComponent {
 
 	
 	
 	private GameModel model;
+	private BufferedImage background;
 
 
 	public GameComponent(GameModel model) {
 	this.model = model;
+	
+	try {
+		background = ImageIO.read(Player.class.getResource("Background.png"));
+	} catch (IOException | IllegalArgumentException e) {
+		background = null;
+	}
 	}
 
 
