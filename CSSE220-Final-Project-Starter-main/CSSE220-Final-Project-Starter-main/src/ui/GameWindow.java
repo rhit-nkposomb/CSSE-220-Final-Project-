@@ -17,7 +17,7 @@ public class GameWindow {
 
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.add(new GameComponent(this.model));
-		this.frame.setSize(600,600);
+		this.frame.pack();
 		this.frame.setLocationRelativeTo(null);
 	}
 

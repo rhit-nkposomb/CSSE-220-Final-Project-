@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import ui.GameComponent;
+
 public class Player {
 	private int row;
 	private int col;
@@ -52,15 +54,19 @@ public class Player {
 	public void moveBy(int dRow, int dCol) {
 		if (dRow > 0) {
 			this.row = row-Math.abs(dRow);
+			if (this.row < 0) {this.row = 0;} 
 		}
 		else if (dRow < 0) {
 			this.row = row+Math.abs(dRow);
+			if (this.row > GameComponent.HEIGHT) {this.row = GameComponent.HEIGHT;}
 		}
 		if (dCol > 0) {
 			this.col = col-Math.abs(dCol);
+			if (this.col < 0) {this.col = 0;} 
 		}
 		else if (dCol < 0) {
 			this.col = col+Math.abs(dCol);
+			if (this.col > GameComponent.WIDTH) {this.col = GameComponent.WIDTH;}
 		}
 	}
 	

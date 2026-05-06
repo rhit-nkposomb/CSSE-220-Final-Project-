@@ -15,12 +15,14 @@ import javax.swing.JComponent;
 
 import model.GameModel;
 import model.Player;
-
+/**
+ * Draws everything, has key listeners to cause the updating in game model
+ */
 public class GameComponent extends JComponent {
 
 	private final GameModel model;
 	public static final int WIDTH = 400;
-	public static final int HEIGHT = 150;
+	public static final int HEIGHT = 600;
 	private BufferedImage background;
 
 // set preferred size in 
@@ -46,7 +48,9 @@ public class GameComponent extends JComponent {
 		    else if(e.getKeyCode() == KeyEvent.VK_A|| e.getKeyCode() == KeyEvent.VK_LEFT) {model.movePlayerLeft(); repaint();}
 		    else if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {model.movePlayerRight(); repaint();}
 		  }
-		});
+			}
+	
+			);
 	
 	
 	}

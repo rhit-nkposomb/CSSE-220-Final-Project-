@@ -17,8 +17,8 @@ public class GameModel extends JPanel{
 	private Player player;
 	private Enemy enemy;
 	public GameModel() {
-		this.player = new Player(5,5);
-		this.enemy = new Enemy(4,7);
+		this.player = new Player(0,0);
+		this.enemy = new Enemy(1,1);
 		
 		
 		
@@ -32,16 +32,16 @@ public class GameModel extends JPanel{
 		return player;
 	}
 	public void movePlayerUp() {
-		player.moveBy(0, 1);
+		player.moveBy(1, 0);
 	}
 	public void movePlayerDown() {
-		player.moveBy(0, -1);
-	}
-	public void movePlayerLeft() {
 		player.moveBy(-1, 0);
 	}
+	public void movePlayerLeft() {
+		player.moveBy(0, -1);
+	}
 	public void movePlayerRight() {
-		player.moveBy(1, 0);
+		player.moveBy(0, 1);
 	}
 	
 	
