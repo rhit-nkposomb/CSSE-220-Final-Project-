@@ -2,6 +2,7 @@ package model;
 
 import javax.swing.JPanel;
 
+
 /**
  * Stores the current state of the game and controls the main game rules.
  * 
@@ -23,6 +24,7 @@ public class GameModel extends JPanel{
 		
 		
 	}
+
 	public Enemy getEnemy() {
 		return enemy;
 	}

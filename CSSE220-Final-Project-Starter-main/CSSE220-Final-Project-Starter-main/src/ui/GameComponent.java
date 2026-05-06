@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ActionMap;
 import javax.swing.JComponent;
 
 import model.GameModel;
@@ -15,7 +18,7 @@ import model.Player;
 
 public class GameComponent extends JComponent {
 
-	private GameModel model;
+	private final GameModel model;
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 150;
 	private BufferedImage background;
@@ -26,6 +29,8 @@ public class GameComponent extends JComponent {
 	this.model = model;
 	this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 	this.setOpaque(true);
+	this.setFocusable(true);
+	this.requestFocusInWindow();
 	
 	try {
 		background = ImageIO.read(GameComponent.class.getResource("background.png"));
@@ -33,9 +38,18 @@ public class GameComponent extends JComponent {
 		background = null;
 	}
 	
+	this.addKeyListener(new KeyAdapter() {
+		  @Override
+		  public void keyPressed(KeyEvent e) {
+		    if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {model.movePlayerUp(); repaint();}
+		    else if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {model.movePlayerDown(); repaint();}
+		    else if(e.getKeyCode() == KeyEvent.VK_A|| e.getKeyCode() == KeyEvent.VK_LEFT) {model.movePlayerLeft(); repaint();}
+		    else if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {model.movePlayerRight(); repaint();}
+		  }
+		});
+	
 	
 	}
-
 
 	@Override
 	protected void paintComponent(Graphics g) {
