@@ -40,8 +40,8 @@ public class Player {
 		int y = this.row * TILE_SIZE;
 		
 		if (sprite!= null) {
-		g2.drawImage(sprite, row,col,TILE_SIZE,TILE_SIZE,null);
-		g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
+//		g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 		}
 		else {
 			g2.setColor(Color.MAGENTA);

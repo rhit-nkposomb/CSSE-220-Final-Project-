@@ -15,8 +15,6 @@ import model.Player;
 
 public class GameComponent extends JComponent {
 
-	
-	
 	private GameModel model;
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 150;
@@ -28,8 +26,9 @@ public class GameComponent extends JComponent {
 	this.model = model;
 	this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 	this.setOpaque(true);
+	
 	try {
-		background = ImageIO.read(Player.class.getResource("background.png"));
+		background = ImageIO.read(GameComponent.class.getResource("background.png"));
 	} catch (IOException | IllegalArgumentException e) {
 		background = null;
 	}
@@ -53,7 +52,7 @@ public class GameComponent extends JComponent {
 			g2.fillRect(0,0, WIDTH,HEIGHT);
 		}
 	model.getPlayer().drawOn(g2);
-	
-	// TODO: draw based on model state
+	model.getEnemy().drawOn(g2);
+
 	}
 }

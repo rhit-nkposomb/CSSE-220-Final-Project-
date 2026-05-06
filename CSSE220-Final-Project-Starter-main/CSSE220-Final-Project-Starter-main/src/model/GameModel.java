@@ -1,6 +1,6 @@
 package model;
 
-
+import javax.swing.JPanel;
 
 /**
  * Stores the current state of the game and controls the main game rules.
@@ -12,17 +12,20 @@ package model;
  * Drawing belongs in GameComponent.
  */
 
-public class GameModel {
+public class GameModel extends JPanel{
 	private Player player;
-	
+	private Enemy enemy;
 	public GameModel() {
 		this.player = new Player(5,5);
+		this.enemy = new Enemy(4,7);
 		
 		
 		
 		
 	}
-
+	public Enemy getEnemy() {
+		return enemy;
+	}
 	public Player getPlayer() {
 		return player;
 	}
