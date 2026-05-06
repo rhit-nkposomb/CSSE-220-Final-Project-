@@ -55,7 +55,7 @@ public class GameComponent extends JComponent {
 	
 	
 	}
-	//hi
+	//hi lol 
 	
 
 	@Override

@@ -15,6 +15,8 @@ public class Player {
 	private int col;
 	private int startRow;
 	private int startCol;
+	private int x;
+	private int y;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	
@@ -39,8 +41,8 @@ public class Player {
 	}
 	
 	public void drawOn(Graphics2D g2) {
-		int x = this.col * TILE_SIZE;
-		int y = this.row * TILE_SIZE;
+		this.x = this.col * TILE_SIZE;
+		this.y = this.row * TILE_SIZE;
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
@@ -55,19 +57,19 @@ public class Player {
 	public void moveBy(int dRow, int dCol) {
 		if (dRow > 0) {
 			this.row = row-Math.abs(dRow);
-			if (this.row < 0) {this.row = 0;} 
+			if (this.row <= 0) {this.row = 0;} 
 		}
 		else if (dRow < 0) {
 			this.row = row+Math.abs(dRow);
-			if (this.row > GameComponent.HEIGHT) {this.row = GameComponent.HEIGHT;}
+			if (this.row >= GameComponent.HEIGHT) {this.row = GameComponent.HEIGHT-y;}
 		}
 		if (dCol > 0) {
-			this.col = col-Math.abs(dCol);
-			if (this.col < 0) {this.col = 0;} 
+			this.col = col+Math.abs(dCol);
+			if (this.col >= GameComponent.WIDTH) {this.col = GameComponent.WIDTH-x;}
 		}
 		else if (dCol < 0) {
-			this.col = col+Math.abs(dCol);
-			if (this.col > GameComponent.WIDTH) {this.col = GameComponent.WIDTH;}
+			this.col = col-Math.abs(dCol);
+			if (this.col <= 0 ) {this.col = 0;}
 		}
 	}
 	
