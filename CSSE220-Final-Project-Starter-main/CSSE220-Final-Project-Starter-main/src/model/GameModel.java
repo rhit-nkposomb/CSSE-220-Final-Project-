@@ -43,7 +43,6 @@ public class GameModel extends JPanel{
 	public void movePlayerRight() {
 		player.moveBy(0, 1);
 	}
-	
-	
-	
 }
+	
+	
