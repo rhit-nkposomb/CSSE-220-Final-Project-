@@ -1,6 +1,5 @@
 package model;
 
-import javax.swing.JPanel;
 
 
 /**
@@ -13,7 +12,7 @@ import javax.swing.JPanel;
  * Drawing belongs in GameComponent.
  */
 
-public class GameModel extends JPanel{
+public class GameModel {
 	private Player player;
 	private Enemy enemy;
 	public GameModel() {
@@ -32,7 +31,7 @@ public class GameModel extends JPanel{
 		return player;
 	}
 	public void updateEnemy() {
-		enemy.update(3, 3);
+		enemy.update();
 			}
 	public void movePlayerUp() {
 		player.moveBy(1, 0);

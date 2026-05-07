@@ -64,7 +64,7 @@ public class GameComponent extends JComponent {
 
 		);
 
-		timer = new Timer(30, e -> {
+		timer = new Timer(100, e -> {
 			
 			model.updateEnemy();
 			
