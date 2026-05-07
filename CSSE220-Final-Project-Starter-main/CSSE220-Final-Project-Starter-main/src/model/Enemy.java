@@ -7,7 +7,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import ui.GameComponent;
+
 public class Enemy {
+	private int x, y;
 	private int row;
 	private int col;
 	private int startRow;
@@ -36,8 +39,8 @@ public class Enemy {
 	}
 	
 	public void drawOn(Graphics2D g2) {
-		int x = this.col * TILE_SIZE;
-		int y = this.row * TILE_SIZE;
+		this.x = this.col * TILE_SIZE;
+		this.y = this.row * TILE_SIZE;
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
@@ -47,5 +50,29 @@ public class Enemy {
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 		}
+		
 	}
+	
+	public void update(int dx, int dy) {
+		 this.x += dx;
+		 this.y += dy;
+		 System.out.println("X:" + x);
+		 if (x * TILE_SIZE <= 0) {
+		        x = 0;
+		        dx = -dx;
+		    }
+		 if (x * TILE_SIZE >= GameComponent.WIDTH) {
+		        x = GameComponent.WIDTH ;
+		        dx = -dx;
+		 }
+		 if (y *TILE_SIZE<= 0) {
+		        y = 0;
+		        dy = -dy;
+		    }
+		 if (y *TILE_SIZE>= GameComponent.HEIGHT) {
+		        y = GameComponent.HEIGHT;
+		        dy = -dy;
+	}
+	}
+	
 }

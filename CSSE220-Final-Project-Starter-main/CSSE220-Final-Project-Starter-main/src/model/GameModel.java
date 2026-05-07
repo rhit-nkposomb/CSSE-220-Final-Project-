@@ -31,6 +31,9 @@ public class GameModel extends JPanel{
 	public Player getPlayer() {
 		return player;
 	}
+	public void updateEnemy() {
+		enemy.update(3, 3);
+			}
 	public void movePlayerUp() {
 		player.moveBy(1, 0);
 	}
