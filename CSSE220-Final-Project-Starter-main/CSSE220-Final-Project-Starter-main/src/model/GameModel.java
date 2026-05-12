@@ -34,16 +34,16 @@ public class GameModel {
 		enemy.update();
 			}
 	public void movePlayerUp() {
-		player.moveBy(1, 0);
+		player.moveBy(0, 1);
 	}
 	public void movePlayerDown() {
-		player.moveBy(-1, 0);
-	}
-	public void movePlayerLeft() {
 		player.moveBy(0, -1);
 	}
+	public void movePlayerLeft() {
+		player.moveBy(-1, 0);
+	}
 	public void movePlayerRight() {
-		player.moveBy(0, 1);
+		player.moveBy(1, 0);
 	}
 }
 	

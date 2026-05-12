@@ -54,23 +54,42 @@ public class Player {
 		}
 	}
 	
-	public void moveBy(int dRow, int dCol) {
-		if (dRow > 0) {
-			this.row = row-Math.abs(dRow);
-			if (this.row <= 0) {this.row = 0;} 
+	public void moveBy(int dx, int dy) {
+		int newrow = this.row;
+		int newcol = this.col;
+		//first check
+//		if (this.row <= 0) {this.row = 0;}
+//		else if (this.row >= GameComponent.HEIGHT/TILE_SIZE) {this.row = GameComponent.HEIGHT/TILE_SIZE;}
+//		else if (this.col >= GameComponent.WIDTH/TILE_SIZE) {this.col = GameComponent.WIDTH/TILE_SIZE; }
+//		else if (this.col <= 0 ) {this.col = 0; }
+//		else {}
+		if (dy > 0) {
+			newrow = row - Math.abs(dy);
+//			if (this.row <= 0) {this.row = 0;} 
 		}
-		else if (dRow < 0) {
-			this.row = row+Math.abs(dRow);
-			if (this.row >= GameComponent.HEIGHT) {this.row = GameComponent.HEIGHT-y;}
+		else if (dy < 0) {
+			newrow = row + Math.abs(dy);
+//			if (this.row >= GameComponent.HEIGHT/TILE_SIZE) {this.row = GameComponent.HEIGHT/TILE_SIZE;}
 		}
-		if (dCol > 0) {
-			this.col = col+Math.abs(dCol);
-			if (this.col >= GameComponent.WIDTH) {this.col = GameComponent.WIDTH-x;}
+		if (dx > 0) {
+			newcol = col + Math.abs(dx);
+//			if (this.col >= GameComponent.WIDTH/TILE_SIZE) {this.col = GameComponent.WIDTH/TILE_SIZE;}
 		}
-		else if (dCol < 0) {
-			this.col = col-Math.abs(dCol);
-			if (this.col <= 0 ) {this.col = 0;}
+		else if (dx < 0) {
+			newcol = col - Math.abs(dx);
+//			if (this.col <= 0 ) {this.col = 0;}
 		}
+			
+		this.col = newcol; 
+		this.row = newrow;
+		
+		//second check
+		if (this.row < 0) {this.row = 0;}
+		if (this.row >= GameComponent.HEIGHT / TILE_SIZE) {this.row = GameComponent.HEIGHT / TILE_SIZE - 1;}
+		if (this.col >= GameComponent.WIDTH / TILE_SIZE) {this.col = GameComponent.WIDTH / TILE_SIZE - 1; }
+		if (this.col < 0 ) {this.col = 0; }
+		
+		
 	}
 	
 	

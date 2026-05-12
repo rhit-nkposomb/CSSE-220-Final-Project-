@@ -63,7 +63,7 @@ public class Enemy {
 		int newcol = this.col + dx;
 //		 this.x += dx;
 //		 this.y += dy;
-		 System.out.println("col:" + col);
+//		 System.out.println("col:" + col);
 		 if (newcol <= 0) {
 		    
 			 this.col = 0;
@@ -71,8 +71,8 @@ public class Enemy {
 		    }
 		 else if (newcol  >= GameComponent.WIDTH/TILE_SIZE) {
 			// System.out.println("Greater than 0");  
-			 this.col = GameComponent.WIDTH/TILE_SIZE ;
-			 System.out.println(col);  
+			 this.col = GameComponent.WIDTH/TILE_SIZE-1 ;
+//			 System.out.println(col);  
 
 			 
 		        dx = -dx;
@@ -82,7 +82,7 @@ public class Enemy {
 		        dy = -dy;
 		    }
 		 else if (newrow >= GameComponent.HEIGHT/TILE_SIZE) {
-		        this.row = GameComponent.HEIGHT/TILE_SIZE;
+		        this.row = GameComponent.HEIGHT/TILE_SIZE-1;
 		        dy = -dy;
 	}
 		 else {
