@@ -65,16 +65,13 @@ public class GameComponent extends JComponent {
 		);
 
 		timer = new Timer(100, e -> {
-			
 			model.updateEnemy();
-			
 			repaint();
 		});
 
 		timer.start();
 
 	}
-	// hi lol
 
 	@Override
 	protected void paintComponent(Graphics g) {

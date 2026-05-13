@@ -1,6 +1,8 @@
 package model;
 
-
+import java.awt.Graphics2D;
+import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  * Stores the current state of the game and controls the main game rules.
@@ -13,14 +15,22 @@ package model;
  */
 
 public class GameModel {
+	public static final int TILE_SIZE = 40;
+
 	private Player player;
 	private Enemy enemy;
+	
 	public GameModel() {
 		this.player = new Player(0,0);
 		this.enemy = new Enemy(1,1);
 		
+		loadLevel("level1.txt");
 		
-		
+		InputStream stream= GameModel.class.getResourceAsStream("level1.txt");
+		if (stream == null) {
+			throw new RuntimeException("Level file not found");
+			
+		}
 		
 	}
 
@@ -45,6 +55,43 @@ public class GameModel {
 	public void movePlayerRight() {
 		player.moveBy(1, 0);
 	}
+	
+	public void loadLevel(String filename) {
+		int row=0;
+		
+		InputStream stream= GameModel.class.getResourceAsStream(filename);
+		if (stream == null) {
+			throw new RuntimeException("Level file not found: " +filename);
+		}
+		
+        Scanner scanner = new Scanner(stream);
+		
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			for (int col = 0; col < line.length(); col++) {
+	            char ch = line.charAt(col);
+	            
+	            if (ch == 'E') {
+	                int x = col * TILE_SIZE;
+	                int y = row * TILE_SIZE;
+
+	                enemy = new Enemy(x, y);
+
+	                scanner.close();
+	                return; // stop after first ball
+		}
+			}
+			row++;
+		}
+		scanner.close();
+		throw new IllegalStateException("No E found in level file");
+	}
+	
+		
+		
+	
 }
+	
+	 
 	
 	
