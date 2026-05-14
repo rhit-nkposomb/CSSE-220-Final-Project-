@@ -25,13 +25,13 @@ public class GameModel {
 		//this.enemy = new Enemy(1,1);
 		
 		loadLevel("level1.txt");
-		int col=0;
-//		
-//		InputStream stream= GameModel.class.getResourceAsStream(filename);
-//		if (stream == null) {
-//			throw new RuntimeException(filename + " not found");
-//			
-//		}
+		//int col=0;
+		
+		InputStream stream= GameModel.class.getResourceAsStream("level1.txt");
+		if (stream == null) {
+			throw new RuntimeException("Level file not found");
+			
+		}
 		
 	}
 
@@ -76,12 +76,12 @@ public class GameModel {
 	            
 	            System.out.println(ch);
 	            if (ch == 'E') {
-	                int x = col * TILE_SIZE;
-	                int y = row * TILE_SIZE;
+	               // int x = col * TILE_SIZE;
+	               // int y = row * TILE_SIZE;
 	                System.out.println("Enemy found.");
 
-	                enemy = new Enemy(x, y);
-	                System.out.println(x +" " +y);
+	                enemy = new Enemy(row, col);
+	                System.out.println(col +" " +row);
 
 	                return; // stop after first ball
 		}
