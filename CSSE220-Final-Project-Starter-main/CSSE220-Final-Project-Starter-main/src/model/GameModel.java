@@ -15,14 +15,14 @@ import java.util.Scanner;
  */
 
 public class GameModel {
-	public static final int TILE_SIZE = 40;
+	public static final int TILE_SIZE = 200;
 
 	private Player player;
 	private Enemy enemy;
 	
 	public GameModel() {
 		this.player = new Player(0,0);
-		this.enemy = new Enemy(1,1);
+		//this.enemy = new Enemy(1,1);
 		
 		loadLevel("level1.txt");
 		
@@ -35,9 +35,11 @@ public class GameModel {
 	}
 
 	public Enemy getEnemy() {
+		System.out.println(enemy.getRow());
 		return enemy;
 	}
 	public Player getPlayer() {
+		//System.out.println(player.getCol());
 		return player;
 	}
 	public void updateEnemy() {
@@ -71,13 +73,15 @@ public class GameModel {
 			for (int col = 0; col < line.length(); col++) {
 	            char ch = line.charAt(col);
 	            
+	            System.out.println(ch);
 	            if (ch == 'E') {
 	                int x = col * TILE_SIZE;
 	                int y = row * TILE_SIZE;
+	                System.out.println("Enemy found.");
 
 	                enemy = new Enemy(x, y);
+	                System.out.println(x +" " +y);
 
-	                scanner.close();
 	                return; // stop after first ball
 		}
 			}
