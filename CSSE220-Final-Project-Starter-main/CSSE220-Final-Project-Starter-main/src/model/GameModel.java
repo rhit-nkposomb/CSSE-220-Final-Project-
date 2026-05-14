@@ -25,6 +25,7 @@ public class GameModel {
 		//this.enemy = new Enemy(1,1);
 		
 		loadLevel("level1.txt");
+		int col=0;
 //		
 //		InputStream stream= GameModel.class.getResourceAsStream(filename);
 //		if (stream == null) {
