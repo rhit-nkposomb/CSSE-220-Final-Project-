@@ -25,12 +25,12 @@ public class GameModel {
 		this.enemy = new Enemy(1,1);
 		
 		loadLevel("level1.txt");
-		
-		InputStream stream= GameModel.class.getResourceAsStream("level1.txt");
-		if (stream == null) {
-			throw new RuntimeException("Level file not found");
-			
-		}
+//		
+//		InputStream stream= GameModel.class.getResourceAsStream(filename);
+//		if (stream == null) {
+//			throw new RuntimeException(filename + " not found");
+//			
+//		}
 		
 	}
 

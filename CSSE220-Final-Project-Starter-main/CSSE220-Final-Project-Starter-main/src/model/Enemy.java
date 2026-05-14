@@ -57,6 +57,12 @@ public class Enemy {
 		
 	}
 	
+	public void reset() {
+		// TODO: Move the ball back to its original position
+		// Replace the current x with the original x
+		this.row = this.startRow;
+		this.col = this.startCol;
+	}
 	public void update() {
 //		x+=dx;
 		int newrow = this.row + dy;
