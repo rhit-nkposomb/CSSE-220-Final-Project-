@@ -24,16 +24,7 @@ public class GameModel {
 	public GameModel() {
 		//this.player = new Player(0,0);
 		enemies= new ArrayList<>();
-		
-		
 		loadLevel("level1.txt");
-		//int col=0;
-		
-		InputStream stream= GameModel.class.getResourceAsStream("level1.txt");
-		if (stream == null) {
-			throw new RuntimeException("Level file not found");
-			
-		}
 		
 	}
 
@@ -52,7 +43,7 @@ public class GameModel {
 			e.update();
 			if(player.collidesWith(e)) {
 				//life lost
-				
+				System.out.println("Colliding with player");
 				player.reset();
 				
 			};
@@ -63,6 +54,7 @@ public class GameModel {
 		 for (Enemy e: enemies) {
 			 if(player.collidesWith(e)) {
 					//life lost
+				 System.out.println("Colliding with enemy");
 					player.reset();	
 				};
 		 }
