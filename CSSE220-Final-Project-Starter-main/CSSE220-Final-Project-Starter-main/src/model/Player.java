@@ -92,8 +92,10 @@ public class Player implements Collideable{
 	@Override
 	public boolean collidesWith(Collideable e) {
 		// TODO Auto-generated method stub
-		Player otherPlayer =(Player) e ;
-		return this.getBounds().intersects(otherPlayer.getBounds());
+		return this.getBounds().intersects(e.getBounds());
+		
+		
+		
 		}
 	
 	public void reset() {

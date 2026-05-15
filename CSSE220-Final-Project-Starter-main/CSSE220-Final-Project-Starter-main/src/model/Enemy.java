@@ -103,10 +103,9 @@ public class Enemy implements Collideable{
 	}
 
 	@Override
-	public boolean collidesWith(Collideable player) {
+	public boolean collidesWith(Collideable p) {
 		// TODO Auto-generated method stub
-		Enemy otherenemy = (Enemy) player;
-		return this.getBounds().intersects(otherenemy.getBounds());
+		return this.getBounds().intersects(p.getBounds());
 	}
 	
 	

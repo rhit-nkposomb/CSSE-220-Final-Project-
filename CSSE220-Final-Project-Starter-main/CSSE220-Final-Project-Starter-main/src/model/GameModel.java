@@ -50,8 +50,9 @@ public class GameModel {
 	public void updateEnemy() {
 		for (Enemy e: enemies) {
 			e.update();
-			if(player.collidesWith((Collideable)e)) {
+			if(player.collidesWith(e)) {
 				//life lost
+				
 				player.reset();
 				
 			};
@@ -60,7 +61,7 @@ public class GameModel {
 	public void movePlayer(int dx, int dy) {
 		player.moveBy(dx, dy);
 		 for (Enemy e: enemies) {
-			 if(player.collidesWith((Collideable)e)) {
+			 if(player.collidesWith(e)) {
 					//life lost
 					player.reset();	
 				};

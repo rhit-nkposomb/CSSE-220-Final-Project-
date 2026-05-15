@@ -1,7 +1,9 @@
 package model;
 
+import java.awt.Rectangle;
+
 public interface Collideable {
 	boolean collidesWith(Collideable other); 
-	void scale();
+	Rectangle getBounds();
 
 }
