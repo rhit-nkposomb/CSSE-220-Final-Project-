@@ -17,9 +17,11 @@ public class Enemy implements Collideable{
 	private int startRow;
 	private int startCol;
 	private int dx, dy;
-	int x = this.col * TILE_SIZE;
-	int y = this.row * TILE_SIZE;
 	private static final int TILE_SIZE = 40;
+	int x;
+	int y;
+	//int x = this.col * TILE_SIZE;
+	//int y = this.row * TILE_SIZE;
 	BufferedImage sprite;
 	
 	public Enemy(int row, int col) {
@@ -45,8 +47,8 @@ public class Enemy implements Collideable{
 	}
 	
 	public void drawOn(Graphics2D g2) {
-		
-		
+		int x = this.col * TILE_SIZE;
+		int y = this.row * TILE_SIZE;
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
@@ -96,6 +98,7 @@ public class Enemy implements Collideable{
 		 }
 	}
 	
+	//have to figure why this isnt appearing?
 	public Rectangle getBounds() {
 		int newrow = this.row + dy;
 		int newcol = this.col + dx;

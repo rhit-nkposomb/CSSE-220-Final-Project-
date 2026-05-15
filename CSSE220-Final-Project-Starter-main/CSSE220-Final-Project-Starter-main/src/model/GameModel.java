@@ -85,16 +85,16 @@ public class GameModel {
 			for (int col = 0; col < line.length(); col++) {
 	            char ch = line.charAt(col);
 	            
-	            System.out.println(ch);
+	         //   System.out.println(ch);
 	            if (ch == 'P') {
 	            	player = new Player(row, col);
-	                System.out.println(col +" " +row);
+	                System.out.println("p="+col +" " +row);
 	            }
 	                
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
- 	               // System.out.println(col +" " +row);
- 	                 // stop after first ball
+ 	               System.out.println(row+" "+col);
+ 	               
                 }
 			
 		}
@@ -113,6 +113,7 @@ public class GameModel {
 		}
 		
 		for(Enemy e: enemies) {
+			
 			e.drawOn(g2);
 		}	
 	}
