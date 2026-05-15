@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -9,13 +10,15 @@ import javax.imageio.ImageIO;
 
 import ui.GameComponent;
 
-public class Enemy {
+public class Enemy implements Collideable{
 	//private int x, y;
 	private int row;
 	private int col;
 	private int startRow;
 	private int startCol;
 	private int dx, dy;
+	int x = this.col * TILE_SIZE;
+	int y = this.row * TILE_SIZE;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	
@@ -42,13 +45,14 @@ public class Enemy {
 	}
 	
 	public void drawOn(Graphics2D g2) {
-		int x = this.col * TILE_SIZE;
-		int y = this.row * TILE_SIZE;
+		
 		
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
-//		g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		g2.setColor(Color.CYAN);
+		g2.draw(getBounds());
+		
 		}
 		else {
 			g2.setColor(Color.MAGENTA);
@@ -57,12 +61,7 @@ public class Enemy {
 		
 	}
 	
-	public void reset() {
-		// TODO: Move the ball back to its original position
-		// Replace the current x with the original x
-		this.row = this.startRow;
-		this.col = this.startCol;
-	}
+	
 	public void update() {
 //		x+=dx;
 		int newrow = this.row + dy;
@@ -96,5 +95,20 @@ public class Enemy {
 			 this.col += dx;
 		 }
 	}
+	
+	public Rectangle getBounds() {
+		int newrow = this.row + dy;
+		int newcol = this.col + dx;
+		return new Rectangle(x,y,TILE_SIZE,TILE_SIZE);
+	}
+
+	@Override
+	public boolean collidesWith(Collideable player) {
+		// TODO Auto-generated method stub
+		Enemy otherenemy = (Enemy) player;
+		return this.getBounds().intersects(otherenemy.getBounds());
+	}
+	
+	
 	
 }

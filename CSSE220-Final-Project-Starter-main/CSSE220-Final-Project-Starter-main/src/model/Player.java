@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ import javax.imageio.ImageIO;
 
 import ui.GameComponent;
 
-public class Player {
+public class Player implements Collideable{
 	private int row;
 	private int col;
 	private int startRow;
@@ -45,7 +46,8 @@ public class Player {
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
-//		g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+		g2.setColor(Color.RED);
+		g2.draw(getBounds());
 		}
 		else {
 			g2.setColor(Color.MAGENTA);
@@ -56,19 +58,11 @@ public class Player {
 	public void moveBy(int dx, int dy) {
 		int newrow = this.row;
 		int newcol = this.col;
-		//first check
-//		if (this.row <= 0) {this.row = 0;}
-//		else if (this.row >= GameComponent.HEIGHT/TILE_SIZE) {this.row = GameComponent.HEIGHT/TILE_SIZE;}
-//		else if (this.col >= GameComponent.WIDTH/TILE_SIZE) {this.col = GameComponent.WIDTH/TILE_SIZE; }
-//		else if (this.col <= 0 ) {this.col = 0; }
-//		else {}
 		if (dy > 0) {
-			newrow = row - Math.abs(dy);
-//			if (this.row <= 0) {this.row = 0;} 
+			newrow = row - Math.abs(dy); 
 		}
 		else if (dy < 0) {
 			newrow = row + Math.abs(dy);
-//			if (this.row >= GameComponent.HEIGHT/TILE_SIZE) {this.row = GameComponent.HEIGHT/TILE_SIZE;}
 		}
 		if (dx > 0) {
 			newcol = col + Math.abs(dx);
@@ -90,6 +84,25 @@ public class Player {
 		
 		
 	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
+	}
+
+	@Override
+	public boolean collidesWith(Collideable e) {
+		// TODO Auto-generated method stub
+		Player otherPlayer =(Player) e ;
+		return this.getBounds().intersects(otherPlayer.getBounds());
+		}
+	
+	public void reset() {
+		// TODO: Move the ball back to its original position
+		// Replace the current x with the original x
+		this.row = this.startRow;
+		this.col = this.startCol;
+	}
+	
 	
 	
 	

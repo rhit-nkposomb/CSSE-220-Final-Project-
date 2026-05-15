@@ -47,16 +47,16 @@ public class GameComponent extends JComponent {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-					model.movePlayerUp();
+					model.movePlayer(0,1);
 					repaint();
 				} else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
-					model.movePlayerDown();
+					model.movePlayer(0,-1);
 					repaint();
 				} else if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-					model.movePlayerLeft();
+					model.movePlayer(-1,0);
 					repaint();
 				} else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-					model.movePlayerRight();
+					model.movePlayer(1,0);
 					repaint();
 				}
 			}
@@ -66,6 +66,7 @@ public class GameComponent extends JComponent {
 
 		timer = new Timer(500, e -> {
 			model.updateEnemy();
+			
 			repaint();
 		});
 
@@ -86,8 +87,8 @@ public class GameComponent extends JComponent {
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect(0, 0, WIDTH, HEIGHT);
 		}
-		model.getPlayer().drawOn(g2);
-		model.getEnemy().drawOn(g2);
+		model.draw(g2);
+		//model.getEnemy().drawOn(g2);
 
 	}
 }
