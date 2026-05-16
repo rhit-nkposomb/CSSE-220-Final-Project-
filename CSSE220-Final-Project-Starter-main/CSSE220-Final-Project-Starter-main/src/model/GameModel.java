@@ -39,25 +39,42 @@ public class GameModel {
 	//}
 	
 	public void updateEnemy() {
+		//checks if collides with player
 		for (Enemy e: enemies) {
 			e.update();
-			if(player.collidesWith(e)) {
-				//life lost
-				System.out.println("Colliding with player");
-				player.reset();
+				
+		
+	    //checks if 2 enemies collide
+	    for (int i=0; i<enemies.size();i++) {
+	    	for(int j=i+1; j<enemies.size();j++) {
+	    		Enemy a = enemies.get(i);
+	    		Enemy b = enemies.get(j);
+	    		
+	    		if(a.collidesWith(b)) {
+	    			System.out.println("Enemies collide.");
+	    			a.reverse();
+	    			b.reverse();
+	    		}
+	    	}
+	    }
+				
 				
 			};
+			
+		
+		
 		}
-			}
+			
 	public void movePlayer(int dx, int dy) {
 		player.moveBy(dx, dy);
-		 for (Enemy e: enemies) {
-			 if(player.collidesWith(e)) {
-					//life lost
-				 System.out.println("Colliding with enemy");
-					player.reset();	
-				};
-		 }
+		for(int k=enemies.size()-1; k>=0;k--) {
+			if(player.collidesWith(enemies.get(k))) {
+				//life lost
+				enemies.remove(k);
+				System.out.println("Colliding with player");
+				player.reset();
+		}
+	}
 		
 	}
 //	public void movePlayerDown() {

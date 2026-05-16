@@ -100,8 +100,10 @@ public class Enemy implements Collideable{
 	
 	//have to figure why this isnt appearing?
 	public Rectangle getBounds() {
-		int newrow = this.row + dy;
-		int newcol = this.col + dx;
+		//int newrow = this.row + dy;
+		//int newcol = this.col + dx;
+		int x = this.col * TILE_SIZE;
+		int y = this.row * TILE_SIZE;
 		return new Rectangle(x,y,TILE_SIZE,TILE_SIZE);
 	}
 
@@ -109,6 +111,11 @@ public class Enemy implements Collideable{
 	public boolean collidesWith(Collideable p) {
 		// TODO Auto-generated method stub
 		return this.getBounds().intersects(p.getBounds());
+	}
+	
+	public void reverse() {
+		dx=-dx;
+		dy=-dy;
 	}
 	
 	
