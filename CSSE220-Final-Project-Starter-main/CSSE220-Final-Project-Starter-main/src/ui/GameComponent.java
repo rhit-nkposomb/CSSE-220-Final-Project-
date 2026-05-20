@@ -84,8 +84,8 @@ public class GameComponent extends JComponent {
 		g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
 		if (background != null) {
 			g2.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
-			g2.drawString("Total Enemies: " + model.getTotalenemies(),30, 60);
-			g2.drawString("Enemies killed : " + model.getLostenemies(),30, 100);
+			g2.drawString("Total Lives: " + model.getLives(),30, 60);
+			g2.drawString("Sticks caught: " + model.getCaughtsticks(),30, 100);
 			
 			if(model.isGameOver()) {
 				g2.drawString("GAMMMMMMME OVEEEEEEEEEER !!!!!",100,70);

@@ -63,4 +63,4 @@ public class Collectable implements Collideable {
 		return this.getBounds().intersects(e.getBounds());
 	}
 }
-}
+

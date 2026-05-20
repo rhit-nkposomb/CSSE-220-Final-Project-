@@ -21,8 +21,8 @@ public class GameModel {
 	private Player player;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectable> sticks;
-	private int totalenemies;
-	private int lostenemies;
+	private int totalsticks;
+	private int caughtsticks;
 
 	private int lives;
 	
@@ -32,9 +32,9 @@ public class GameModel {
 		enemies= new ArrayList<>();
 		sticks = new ArrayList<>();
 		loadLevel("level1.txt");
-		totalenemies=enemies.size();
-		lostenemies=0;
-		lives=1;
+		totalsticks=sticks.size();
+		caughtsticks=0;
+		lives=2;
 		
 	}
 
@@ -49,7 +49,7 @@ public class GameModel {
 	//}
 	
 	public void updateEnemy() {
-		//checks if collides with player
+		
 		for (Enemy e: enemies) {
 			e.update();
 				
@@ -60,9 +60,11 @@ public class GameModel {
 	    	//checks if enemy collides with player first 
 	    	Enemy a = enemies.get(i);
     		if(a.collidesWith(player)) {
+    			lives-=1;
     			System.out.println("Got Player.");
     		}
     		
+    		//checks if collides with player
 	    	for(int j=i+1; j<enemies.size();j++) {
 	    		Enemy b = enemies.get(j);
 	   
@@ -78,16 +80,18 @@ public class GameModel {
 	    }	
 			};
 		
-			
+	
+
+	//player updating and getting sticks
 	public void movePlayer(int dx, int dy) {
 		player.moveBy(dx, dy);
-		for(int k=enemies.size()-1; k>=0;k--) {
-			if(player.collidesWith(enemies.get(k))) {
+		for(int k=sticks.size()-1; k>=0;k--) {
+			if(player.collidesWith(sticks.get(k))) {
 				//life lost
-				enemies.remove(k);
-				lostenemies++;
-				System.out.println("Player colliding with enemy.");
-				player.reset();
+				sticks.remove(k);
+				caughtsticks++;
+				System.out.println("Got stick.");
+				//player.reset();
 		}
 	}
 		
@@ -160,17 +164,36 @@ public class GameModel {
 		}	
 	}
 
-	public int getTotalenemies() {
-		return totalenemies;
-	}
+	//public int getTotalenemies() {
+	//	return totalenemies;
+	//}
 
-	public int getLostenemies() {
-		return lostenemies;
-	}
+	//public int getLostenemies() {
+	//	return lostenemies;
+	//}
 	
 	public boolean isGameOver() {
-		return enemies.isEmpty();
+		return sticks.isEmpty() || lives==0;
 	}
+	
+	public int getLives() {
+		return lives;
+	}
+
+	public ArrayList<Collectable> getSticks() {
+		return sticks;
+	}
+
+	public int getTotalsticks() {
+		return totalsticks;
+	}
+
+	public int getCaughtsticks() {
+		return caughtsticks;
+	}
+	
+	
+     
 		
 	
 }
