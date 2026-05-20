@@ -71,9 +71,13 @@ public class GameComponent extends JComponent {
 			repaint();
 		});
 
-		timer.start();
+		//timer.start();
 
 	}
+	public void startTimer() {
+	    timer.start();
+	}
+	
 
 	@Override
 	protected void paintComponent(Graphics g) {
