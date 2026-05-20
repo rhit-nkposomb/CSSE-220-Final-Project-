@@ -64,8 +64,10 @@ public class GameComponent extends JComponent {
 
 		);
 
-		timer = new Timer(500, e -> {
-			model.updateEnemy();
+		timer = new Timer(800, e -> {
+			if(!model.isGameOver()) {
+				model.updateEnemy();
+			}
 			repaint();
 		});
 
@@ -82,11 +84,20 @@ public class GameComponent extends JComponent {
 		g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
 		if (background != null) {
 			g2.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+			g2.drawString("Total Enemies: " + model.getTotalenemies(),30, 60);
+			g2.drawString("Enemies killed : " + model.getLostenemies(),30, 100);
+			
+			if(model.isGameOver()) {
+				g2.drawString("GAMMMMMMME OVEEEEEEEEEER !!!!!",100,70);
+			}
+			
 		} else {
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect(0, 0, WIDTH, HEIGHT);
 		}
+		
 		model.draw(g2);
+		
 		//model.getEnemy().drawOn(g2);
 
 	}

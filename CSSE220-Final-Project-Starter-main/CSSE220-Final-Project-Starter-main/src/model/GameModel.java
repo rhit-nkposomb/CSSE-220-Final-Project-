@@ -20,11 +20,19 @@ public class GameModel {
 
 	private Player player;
 	private ArrayList<Enemy> enemies;
+	private int totalenemies;
+	private int lostenemies;
+
+	private int lives;
+	
 	
 	public GameModel() {
 		//this.player = new Player(0,0);
 		enemies= new ArrayList<>();
 		loadLevel("level1.txt");
+		totalenemies=enemies.size();
+		lostenemies=0;
+		lives=1;
 		
 	}
 
@@ -46,24 +54,28 @@ public class GameModel {
 		
 	    //checks if 2 enemies collide
 	    for (int i=0; i<enemies.size();i++) {
+	    	
+	    	//checks if enemy collides with player first 
+	    	Enemy a = enemies.get(i);
+    		if(a.collidesWith(player)) {
+    			System.out.println("Got Player.");
+    		}
+    		
 	    	for(int j=i+1; j<enemies.size();j++) {
-	    		Enemy a = enemies.get(i);
 	    		Enemy b = enemies.get(j);
-	    		
+	   
 	    		if(a.collidesWith(b)) {
 	    			System.out.println("Enemies collide.");
 	    			a.reverse();
 	    			b.reverse();
 	    		}
-	    	}
+	    
+	    	
 	    }
-				
-				
+	    	}
+	    }	
 			};
-			
 		
-		
-		}
 			
 	public void movePlayer(int dx, int dy) {
 		player.moveBy(dx, dy);
@@ -71,7 +83,8 @@ public class GameModel {
 			if(player.collidesWith(enemies.get(k))) {
 				//life lost
 				enemies.remove(k);
-				System.out.println("Colliding with player");
+				lostenemies++;
+				System.out.println("Player colliding with enemy.");
 				player.reset();
 		}
 	}
@@ -133,6 +146,18 @@ public class GameModel {
 			
 			e.drawOn(g2);
 		}	
+	}
+
+	public int getTotalenemies() {
+		return totalenemies;
+	}
+
+	public int getLostenemies() {
+		return lostenemies;
+	}
+	
+	public boolean isGameOver() {
+		return enemies.isEmpty();
 	}
 		
 	
