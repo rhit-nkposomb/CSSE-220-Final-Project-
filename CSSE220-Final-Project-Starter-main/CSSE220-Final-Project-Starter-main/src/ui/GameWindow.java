@@ -46,3 +46,6 @@ public class GameWindow {
 		this.frame.setVisible(true);
 		}
 }
+
+//JButton for next level 
+//method that load next level when button clicked 

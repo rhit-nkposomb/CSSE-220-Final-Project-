@@ -87,7 +87,6 @@ public class GameModel {
 		player.moveBy(dx, dy);
 		for(int k=sticks.size()-1; k>=0;k--) {
 			if(player.collidesWith(sticks.get(k))) {
-				//life lost
 				sticks.remove(k);
 				caughtsticks++;
 				System.out.println("Got stick.");
