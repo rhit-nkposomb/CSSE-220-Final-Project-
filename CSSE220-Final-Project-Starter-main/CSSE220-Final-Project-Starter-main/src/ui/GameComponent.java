@@ -38,7 +38,7 @@ public class GameComponent extends JComponent {
 		this.requestFocusInWindow();
 
 		try {
-			background = ImageIO.read(GameComponent.class.getResource("background.png"));
+			background = ImageIO.read(GameComponent.class.getResource("Background (1).png"));
 		} catch (IOException | IllegalArgumentException e) {
 			background = null;
 		}
