@@ -61,6 +61,6 @@ public class Collectable implements Collideable {
 	public boolean collidesWith(Collideable e) {
 		// TODO Auto-generated method stub
 		return this.getBounds().intersects(e.getBounds());
-		
+	}
 }
 }

@@ -20,6 +20,7 @@ public class GameModel {
 
 	private Player player;
 	private ArrayList<Enemy> enemies;
+	private ArrayList<Collectable> sticks;
 	private int totalenemies;
 	private int lostenemies;
 
@@ -29,6 +30,7 @@ public class GameModel {
 	public GameModel() {
 		//this.player = new Player(0,0);
 		enemies= new ArrayList<>();
+		sticks = new ArrayList<>();
 		loadLevel("level1.txt");
 		totalenemies=enemies.size();
 		lostenemies=0;
@@ -126,6 +128,12 @@ public class GameModel {
  	               System.out.println(row+" "+col);
  	               
                 }
+                
+                if (ch == 'S') {
+ 	                sticks.add(new Collectable(row,col));
+ 	               System.out.println(row+" "+col);
+ 	               
+                }
 			
 		}
 			row++;
@@ -145,6 +153,10 @@ public class GameModel {
 		for(Enemy e: enemies) {
 			
 			e.drawOn(g2);
+		}	
+		for(Collectable s: sticks) {
+			
+			s.drawOn(g2);
 		}	
 	}
 
