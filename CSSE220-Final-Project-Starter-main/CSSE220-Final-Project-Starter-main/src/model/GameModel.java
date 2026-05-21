@@ -77,8 +77,6 @@ public class GameModel {
 	    			a.reverse();
 	    			b.reverse();
 	    		}
-	    
-	    	
 	    }
 	    	}
 	    	
@@ -98,14 +96,11 @@ public class GameModel {
 		}
 		
 		for(Walls w:walls) {
-			if(player.collidesWith(w)) {
+			if(w.getCol()==player.getCol() && w.getRow()==player.getRow()) {
 				player.reset();
-				System.out.println("Hit wall.");
-				
-					
+				System.out.println("Hit wall.");	
 				}
 			}
-	    
 	}
 	
 	
@@ -123,14 +118,11 @@ public class GameModel {
 //	
 	public void loadLevel(String filename) {
 		int row=0;
-		
 		InputStream stream= GameModel.class.getResourceAsStream(filename);
 		if (stream == null) {
 			throw new RuntimeException("Level file not found: " +filename);
 		}
-		
         Scanner scanner = new Scanner(stream);
-		
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			for (int col = 0; col < line.length(); col++) {
@@ -140,19 +132,15 @@ public class GameModel {
 	            if (ch == 'P') {
 	            	player = new Player(row, col);
 	                System.out.println("p="+col +" " +row);
-	            }
-	                
+	            } 
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
- 	               System.out.println(row+" "+col);
- 	               
+ 	               System.out.println(row+" "+col);  
                 }
-                
                 if (ch == 'S') {
  	                sticks.add(new Collectable(row,col));
  	               System.out.println(row+" "+col); 
                 }
-                
                 if (ch == 'W') {
  	                walls.add(new Walls(row,col));
  	               System.out.println("walls= "+row+" "+col); 
@@ -160,28 +148,21 @@ public class GameModel {
 			
 		}
 			row++;
-		
 		}
 		scanner.close();
 		//throw new IllegalStateException("No P found in level file");
-		
-		
 	}
 	
 	public void draw( Graphics2D g2) {
 		if(player != null) {
 			player.drawOn(g2);
 		}
-		
 		for(Enemy e: enemies) {
-			
 			e.drawOn(g2);
 		}	
 		for(Collectable s: sticks) {
-			
 			s.drawOn(g2);
 		}	
-		
        for(Walls w: walls) {
     	   w.drawOn(g2);
 		}

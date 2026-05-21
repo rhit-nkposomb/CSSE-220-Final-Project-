@@ -21,6 +21,7 @@ public class Player implements Collideable{
 	private int dy;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
+	Walls w;
 	
 	public Player(int row, int col) {
 		this.row = row;
@@ -110,10 +111,6 @@ public class Player implements Collideable{
 		this.col = this.startCol;
 	}
 	
-	public void reverse() {
-		dx=-dx;
-		dy=-dy;
-	}
 	
 	
 	
