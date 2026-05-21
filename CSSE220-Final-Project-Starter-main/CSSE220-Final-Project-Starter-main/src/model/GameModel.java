@@ -97,7 +97,6 @@ public class GameModel {
 		
 		for(Walls w:walls) {
 			if(w.getCol()==player.getCol() && w.getRow()==player.getRow()) {
-				player.reset();
 				System.out.println("Hit wall.");	
 				}
 			}
