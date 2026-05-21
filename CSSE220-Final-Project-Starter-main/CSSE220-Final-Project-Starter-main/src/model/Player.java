@@ -17,6 +17,8 @@ public class Player implements Collideable{
 	private int startCol;
 	private int x;
 	private int y;
+	private int dx;
+	private int dy;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	
@@ -25,6 +27,8 @@ public class Player implements Collideable{
 		this.col = col;
 		this.startRow = row;
 		this.startCol = col;
+		this.dx=10;
+		this.dy=10;
 		try {
 			sprite = ImageIO.read(Player.class.getResource("Player.png"));
 		} catch (IOException | IllegalArgumentException e) {
@@ -46,7 +50,7 @@ public class Player implements Collideable{
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
-		g2.setColor(Color.RED);
+		//g2.setColor(Color.RED);
 		g2.draw(getBounds());
 		}
 		else {
@@ -104,6 +108,11 @@ public class Player implements Collideable{
 		// Replace the current x with the original x
 		this.row = this.startRow;
 		this.col = this.startCol;
+	}
+	
+	public void reverse() {
+		dx=-dx;
+		dy=-dy;
 	}
 	
 	

@@ -94,11 +94,22 @@ public class GameModel {
 				sticks.remove(k);
 				caughtsticks++;
 				System.out.println("Got stick.");
-				//player.reset();
+			}
 		}
-	}
 		
+		for(Walls w:walls) {
+			if(player.collidesWith(w)) {
+				System.out.println("Hit wall.");
+				player.reset();
+					
+				}
+			}
+	    
 	}
+	
+	
+		
+	
 //	public void movePlayerDown() {
 //		player.moveBy(0, -1);
 //	}
@@ -169,6 +180,10 @@ public class GameModel {
 			
 			s.drawOn(g2);
 		}	
+		
+       for(Walls w: walls) {
+    	   w.drawOn(g2);
+		}
 	}
 
 	//public int getTotalenemies() {

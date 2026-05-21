@@ -53,7 +53,7 @@ public class Enemy implements Collideable{
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.CYAN);
-		g2.draw(getBounds());
+		//g2.draw(getBounds());
 		
 		}
 		else {

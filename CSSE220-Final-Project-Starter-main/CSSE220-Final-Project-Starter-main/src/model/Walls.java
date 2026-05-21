@@ -20,7 +20,7 @@ public class Walls implements Collideable {
 		this.col=col;
 		this.row=row;
 		try {
-			sprite = ImageIO.read(Collectable.class.getResource("Bushes.png"));
+			sprite = ImageIO.read(Collectable.class.getResource("Bushes-removebg-preview.png"));
 		} catch (IOException | IllegalArgumentException e) {
 			sprite = null;
 		}
@@ -33,7 +33,7 @@ public class Walls implements Collideable {
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.BLACK);
-		g2.draw(getBounds());
+		//g2.draw(getBounds());
 		}
 		else {
 			g2.setColor(Color.GREEN);
