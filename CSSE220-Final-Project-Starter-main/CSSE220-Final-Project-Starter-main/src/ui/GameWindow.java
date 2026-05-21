@@ -23,20 +23,24 @@ public class GameWindow {
 
 		JPanel cards = new JPanel(new CardLayout());
 		StartPanel startPanel = new StartPanel();
-		component = new GameComponent(this.model);
+		component = new GameComponent(this.model); // why not just put model here?
 		cards.add(startPanel, "START");
 		cards.add(component, "GAME");
 		frame.setContentPane(cards);
 		CardLayout cl = (CardLayout) cards.getLayout();
 		cl.show(cards, "START");
 		startPanel.getStartButton().addActionListener(e -> {
+			cl.show(cards, "GAME");
+			component.requestFocusInWindow();
 		    this.startGame();
-		    cl.show(cards, "GAME");
+		    
+		    
 		});
 		
 		//		this.frame.add(new GameComponent(this.model));
 		this.frame.pack();
 		this.frame.setLocationRelativeTo(null);
+		
 	}
 
 	public void startGame() {
@@ -45,6 +49,8 @@ public class GameWindow {
 	public void show() {
 		this.frame.setVisible(true);
 		}
+	
+	
 }
 
 //JButton for next level 
