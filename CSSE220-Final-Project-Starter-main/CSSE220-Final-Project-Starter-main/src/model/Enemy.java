@@ -59,6 +59,7 @@ public class Enemy implements Collideable{
 		else {
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+			g2.draw(getBounds());
 		}
 		
 	}
@@ -98,7 +99,7 @@ public class Enemy implements Collideable{
 		 }
 	}
 	
-	//have to figure why this isnt appearing?
+	
 	public Rectangle getBounds() {
 		//int newrow = this.row + dy;
 		//int newcol = this.col + dx;

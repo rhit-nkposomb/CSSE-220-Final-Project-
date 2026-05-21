@@ -21,6 +21,7 @@ public class GameModel {
 	private Player player;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectable> sticks;
+	private ArrayList<Walls> walls;
 	private int totalsticks;
 	private int caughtsticks;
 
@@ -31,6 +32,7 @@ public class GameModel {
 		//this.player = new Player(0,0);
 		enemies= new ArrayList<>();
 		sticks = new ArrayList<>();
+		walls=new ArrayList <>();
 		loadLevel("level1.txt");
 		totalsticks=sticks.size();
 		caughtsticks=0;
@@ -136,8 +138,12 @@ public class GameModel {
                 
                 if (ch == 'S') {
  	                sticks.add(new Collectable(row,col));
- 	               System.out.println(row+" "+col);
- 	               
+ 	               System.out.println(row+" "+col); 
+                }
+                
+                if (ch == 'W') {
+ 	                walls.add(new Walls(row,col));
+ 	               System.out.println("walls= "+row+" "+col); 
                 }
 			
 		}

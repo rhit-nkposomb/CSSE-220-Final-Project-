@@ -52,6 +52,7 @@ public class Player implements Collideable{
 		else {
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+			g2.draw(getBounds());
 		}
 	}
 	

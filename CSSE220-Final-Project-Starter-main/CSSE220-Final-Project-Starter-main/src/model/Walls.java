@@ -1,41 +1,29 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Collectable implements Collideable {
+public class Walls implements Collideable {
 	private int row;
 	private int col;
-	//private int startRow;
-	//private int startCol;
 	private int x;
 	private int y;
-	private static final int TILE_SIZE = 40;
+	private static int TILE_SIZE = 40;
 	BufferedImage sprite;
 	
-	public Collectable(int row, int col) {
-		this.row = row;
-		this.col = col;
-		//this.startRow = row;
-		//this.startCol = col;
+	public Walls (int row, int col) {
+		this.col=col;
+		this.row=row;
 		try {
-			sprite = ImageIO.read(Collectable.class.getResource("Stick-removebg-preview.png"));
+			sprite = ImageIO.read(Collectable.class.getResource("Bushes.png"));
 		} catch (IOException | IllegalArgumentException e) {
 			sprite = null;
 		}
-	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public int getCol() {
-		return col;
 	}
 	
 	public void drawOn(Graphics2D g2) {
@@ -44,14 +32,22 @@ public class Collectable implements Collideable {
 		
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
-		g2.setColor(Color.YELLOW);
+		g2.setColor(Color.BLACK);
 		g2.draw(getBounds());
 		}
 		else {
-			g2.setColor(Color.MAGENTA);
+			g2.setColor(Color.GREEN);
 			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 			g2.draw(getBounds());
 		}
+	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
 	}
 	
 	public Rectangle getBounds() {
@@ -63,5 +59,13 @@ public class Collectable implements Collideable {
 		// TODO Auto-generated method stub
 		return this.getBounds().intersects(e.getBounds());
 	}
-}
+	
+	}
+
+
+	
+	
+
+
+
 
