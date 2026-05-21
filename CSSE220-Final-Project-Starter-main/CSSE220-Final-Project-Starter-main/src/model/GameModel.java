@@ -52,6 +52,7 @@ public class GameModel {
 		
 		for (Enemy e: enemies) {
 			e.update();
+		}
 				
 		
 	    //checks if 2 enemies collide
@@ -77,7 +78,7 @@ public class GameModel {
 	    	
 	    }
 	    	}
-	    }	
+	    	
 			};
 		
 	
