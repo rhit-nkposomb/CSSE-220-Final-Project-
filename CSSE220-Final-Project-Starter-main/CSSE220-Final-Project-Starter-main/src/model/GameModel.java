@@ -99,8 +99,9 @@ public class GameModel {
 		
 		for(Walls w:walls) {
 			if(player.collidesWith(w)) {
-				System.out.println("Hit wall.");
 				player.reset();
+				System.out.println("Hit wall.");
+				
 					
 				}
 			}
