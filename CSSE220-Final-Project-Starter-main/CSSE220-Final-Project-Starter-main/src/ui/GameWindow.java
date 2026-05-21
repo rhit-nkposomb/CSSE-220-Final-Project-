@@ -42,6 +42,7 @@ public class GameWindow {
 		this.frame.setLocationRelativeTo(null);
 		
 	}
+	int y=0;
 
 	public void startGame() {
 	    component.startTimer();
