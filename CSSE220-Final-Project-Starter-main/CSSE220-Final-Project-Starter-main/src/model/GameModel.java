@@ -34,7 +34,7 @@ public class GameModel {
 		loadLevel("level1.txt");
 		totalsticks=sticks.size();
 		caughtsticks=0;
-		lives=2;
+		lives=4;
 		
 	}
 
@@ -51,6 +51,11 @@ public class GameModel {
 	public void updateEnemy() {
 		
 		for (Enemy e: enemies) {
+			if(e.collidesWith(player) || player.collidesWith(e)) {
+    			lives= lives-1;
+    			player.reset();
+    			System.out.println("Got Player.");
+    		}
 			e.update();
 		}
 				
@@ -60,10 +65,6 @@ public class GameModel {
 	    	
 	    	//checks if enemy collides with player first 
 	    	Enemy a = enemies.get(i);
-    		if(a.collidesWith(player)) {
-    			lives-=1;
-    			System.out.println("Got Player.");
-    		}
     		
     		//checks if collides with player
 	    	for(int j=i+1; j<enemies.size();j++) {
