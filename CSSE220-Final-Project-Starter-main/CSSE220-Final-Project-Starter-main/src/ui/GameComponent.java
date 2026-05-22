@@ -14,6 +14,7 @@ import javax.swing.ActionMap;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
+import model.Enemy;
 import model.GameModel;
 import model.Player;
 
@@ -38,7 +39,7 @@ public class GameComponent extends JComponent {
 		this.requestFocusInWindow();
 
 		try {
-			background = ImageIO.read(GameComponent.class.getResource("grass.jpg"));
+			background = ImageIO.read(Enemy.class.getResource("grass.jpg"));
 		} catch (IOException | IllegalArgumentException e) {
 			background = null;
 		}
@@ -98,7 +99,7 @@ public class GameComponent extends JComponent {
 				
 		
 		} else {
-			g2.setColor(Color.MAGENTA);
+			g2.setColor(Color.blue);
 			g2.fillRect(0, 0, WIDTH, HEIGHT);
 		}
 		

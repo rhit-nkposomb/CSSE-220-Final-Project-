@@ -3,6 +3,7 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D.Double;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -50,8 +51,8 @@ public class Walls implements Collideable {
 		return col;
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
+	public Double getBounds() {
+		return new Double(x, y, TILE_SIZE, TILE_SIZE);
 	}
 	
 	@Override

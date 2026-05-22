@@ -3,6 +3,7 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -11,12 +12,12 @@ import javax.imageio.ImageIO;
 import ui.GameComponent;
 
 public class Player implements Collideable{
-	private int row;
-	private int col;
+	private double row;
+	private double col;
 	private int startRow;
 	private int startCol;
-	private int x;
-	private int y;
+	private double x;
+	private double y;
 	private int dx;
 	private int dy;
 	private static final int TILE_SIZE = 40;
@@ -37,34 +38,45 @@ public class Player implements Collideable{
 		}
 	}
 
-	public int getRow() {
+	public double getRow() {
 		return row;
 	}
 
-	public int getCol() {
+	public void setRow(double row) {
+		this.row = row;
+	}
+	
+	public double getCol() {
 		return col;
 	}
+
+	public void setCol(double col) {
+		this.col = col;
+	}
+
+	
 	
 	public void drawOn(Graphics2D g2) {
 		this.x = this.col * TILE_SIZE;
 		this.y = this.row * TILE_SIZE;
 		
 		if (sprite!= null) {
-		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
+		g2.drawImage(sprite, (int)x,(int)y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.RED);
 		g2.draw(getBounds());
 		}
 		else {
 			g2.setColor(Color.MAGENTA);
-			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+			g2.fillRect((int)x, (int)y, TILE_SIZE, TILE_SIZE);
 			g2.draw(getBounds());
 		}
 	}
 	
-	public void moveBy(int dx, int dy) {
-		int newrow = this.row;
-		int newcol = this.col;
+	public void moveBy(double dx, double dy) {
+		double newrow = this.row;
+		double newcol = this.col;
 		if (dy > 0) {
+			//System.out.println("Moving?"); for upwards movement
 			newrow = row - Math.abs(dy); 
 		}
 		else if (dy < 0) {
@@ -91,8 +103,9 @@ public class Player implements Collideable{
 		
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
+	public Rectangle2D.Double getBounds() {
+		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
+		
 	}
 
 	@Override
