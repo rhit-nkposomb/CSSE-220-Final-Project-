@@ -18,7 +18,7 @@ public class StartPanel extends JPanel {
 	private JLabel label2;
 	private JButton startButton;
 	private BufferedImage background;
-	
+
 	public StartPanel() {
 		try {
 			background = ImageIO.read(StartPanel.class.getResource("Background (1).png"));
@@ -26,7 +26,7 @@ public class StartPanel extends JPanel {
 			System.out.println("Image failed to load: " + e.getMessage());
 			background = null;
 		}
-		
+
 		label = new JLabel("Welcome to Puppy Simulator!", SwingConstants.CENTER);
 		label2 = new JLabel("Collect Sticks and Don't Get Caught!", SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
@@ -38,10 +38,10 @@ public class StartPanel extends JPanel {
 		this.add(label, BorderLayout.NORTH);
 		this.add(label2, BorderLayout.CENTER);
 		this.add(getStartButton(),BorderLayout.SOUTH);
-	
-	
+
+
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);

@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class Player implements Collideable{
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	Walls w;
-	
+
 	public Player(int row, int col) {
 		this.row = row;
 		this.col = col;
@@ -45,7 +44,7 @@ public class Player implements Collideable{
 	public void setRow(double row) {
 		this.row = row;
 	}
-	
+
 	public double getCol() {
 		return col;
 	}
@@ -54,12 +53,12 @@ public class Player implements Collideable{
 		this.col = col;
 	}
 
-	
-	
+
+
 	public void drawOn(Graphics2D g2) {
 		this.x = this.col * TILE_SIZE;
 		this.y = this.row * TILE_SIZE;
-		
+
 		if (sprite!= null) {
 		g2.drawImage(sprite, (int)x,(int)y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.RED);
@@ -71,13 +70,13 @@ public class Player implements Collideable{
 			g2.draw(getBounds());
 		}
 	}
-	
+
 	public void moveBy(double dx, double dy) {
 		double newrow = this.row;
 		double newcol = this.col;
 		if (dy > 0) {
 			//System.out.println("Moving?"); for upwards movement
-			newrow = row - Math.abs(dy); 
+			newrow = row - Math.abs(dy);
 		}
 		else if (dy < 0) {
 			newrow = row + Math.abs(dy);
@@ -90,39 +89,40 @@ public class Player implements Collideable{
 			newcol = col - Math.abs(dx);
 //			if (this.col <= 0 ) {this.col = 0;}
 		}
-			
-		this.col = newcol; 
+
+		this.col = newcol;
 		this.row = newrow;
-		
+
 		//second check
 		if (this.row < 0) {this.row = 0;}
 		if (this.row >= GameComponent.HEIGHT / TILE_SIZE) {this.row = GameComponent.HEIGHT / TILE_SIZE - 1;}
 		if (this.col >= GameComponent.WIDTH / TILE_SIZE) {this.col = GameComponent.WIDTH / TILE_SIZE - 1; }
 		if (this.col < 0 ) {this.col = 0; }
-		
-		
+
+
 	}
-	
+
+	@Override
 	public Rectangle2D.Double getBounds() {
 		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
-		
+
 	}
 
 	@Override
 	public boolean collidesWith(Collideable e) {
 		return this.getBounds().intersects(e.getBounds());
-		
-		
-		
+
+
+
 		}
-	
+
 	public void reset() {
 		this.row = this.startRow;
 		this.col = this.startCol;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

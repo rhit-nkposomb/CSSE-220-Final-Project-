@@ -1,8 +1,7 @@
 package model;
 
-import java.awt.Graphics2D;
 import java.awt.Color;
-import java.awt.Rectangle;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D.Double;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class Walls implements Collideable {
 	private int y;
 	private static int TILE_SIZE = 40;
 	BufferedImage sprite;
-	
+
 	public Walls (int row, int col) {
 		this.col=col;
 		this.row=row;
@@ -26,11 +25,11 @@ public class Walls implements Collideable {
 			sprite = null;
 		}
 	}
-	
+
 	public void drawOn(Graphics2D g2) {
 		this.x = this.col * TILE_SIZE;
 		this.y = this.row * TILE_SIZE;
-		
+
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.BLACK);
@@ -42,7 +41,7 @@ public class Walls implements Collideable {
 			g2.draw(getBounds());
 		}
 	}
-	
+
 	public int getRow() {
 		return row;
 	}
@@ -50,22 +49,23 @@ public class Walls implements Collideable {
 	public int getCol() {
 		return col;
 	}
-	
+
+	@Override
 	public Double getBounds() {
 		return new Double(x, y, TILE_SIZE, TILE_SIZE);
 	}
-	
+
 	@Override
 	public boolean collidesWith(Collideable e) {
 		// TODO Auto-generated method stub
 		return this.getBounds().intersects(e.getBounds());
 	}
-	
+
 	}
 
 
-	
-	
+
+
 
 
 

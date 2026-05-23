@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Double;
 import java.awt.image.BufferedImage;
@@ -25,7 +24,7 @@ public class Enemy implements Collideable{
 	//int x = this.col * TILE_SIZE;
 	//int y = this.row * TILE_SIZE;
 	BufferedImage sprite;
-	
+
 	public Enemy(int row, int col) {
 		this.row = row;
 		this.col = col;
@@ -47,26 +46,26 @@ public class Enemy implements Collideable{
 	public int getCol() {
 		return col;
 	}
-	
+
 	public void drawOn(Graphics2D g2) {
 		int x = this.col * TILE_SIZE;
 		int y = this.row * TILE_SIZE;
-		
+
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.CYAN);
 		g2.draw(getBounds());
-		
+
 		}
 		else {
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 			g2.draw(getBounds());
 		}
-		
+
 	}
-	
-	
+
+
 	public void update() {
 //		x+=dx;
 		int newrow = this.row + dy;
@@ -75,16 +74,16 @@ public class Enemy implements Collideable{
 //		 this.y += dy;
 //		 System.out.println("col:" + col);
 		 if (newcol <= 0) {
-		    
+
 			 this.col = 0;
 		        dx = -dx;
 		    }
 		 else if (newcol  >= GameComponent.WIDTH/TILE_SIZE) {
-			// System.out.println("Greater than 0");  
+			// System.out.println("Greater than 0");
 			 this.col = GameComponent.WIDTH/TILE_SIZE-1 ;
-//			 System.out.println(col);  
+//			 System.out.println(col);
 
-			 
+
 		        dx = -dx;
 		 }
 		 else if (newrow<= 0) {
@@ -100,8 +99,9 @@ public class Enemy implements Collideable{
 			 this.col += dx;
 		 }
 	}
-	
-	
+
+
+	@Override
 	public Double getBounds() {
 		//int newrow = this.row + dy;
 		//int newcol = this.col + dx;
@@ -116,7 +116,7 @@ public class Enemy implements Collideable{
 		// TODO Auto-generated method stub
 		return this.getBounds().intersects(p.getBounds());
 	}
-	
+
 	public void reverse() {
 		dx=-dx;
 		dy=-dy;
@@ -125,7 +125,7 @@ public class Enemy implements Collideable{
 		this.row = this.startRow;
 		this.col = this.startCol;
 	}
-	
-	
-	
+
+
+
 }

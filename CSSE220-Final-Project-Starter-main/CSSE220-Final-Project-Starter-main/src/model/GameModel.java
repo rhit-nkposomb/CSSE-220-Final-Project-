@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 /**
  * Stores the current state of the game and controls the main game rules.
- * 
+ *
  * This is where the game keeps track of objects such as the player,
  * walls, gems, zombies, score, lives, and levels.
- * 
+ *
  * GameModel should update the game state, but it should not draw anything.
  * Drawing belongs in GameComponent.
  */
@@ -25,10 +25,10 @@ public class GameModel {
 	private ArrayList<Walls> walls;
 	private int totalsticks;
 	private int caughtsticks;
-
+	private int win;
 	private int lives;
-	
-	
+
+
 	public GameModel() {
 		//this.player = new Player(0,0);
 		enemies= new ArrayList<>();
@@ -39,20 +39,21 @@ public class GameModel {
 		caughtsticks=0;
 		lives=4;
 		
+
 	}
 
 	//public Enemy getEnemy() {
 		//System.out.println(enemy.getRow());
 	//	return enemy;
 	//}
-	
+
 	//public Player getPlayer() {
 		//System.out.println(player.getCol());
 	//	return player;
 	//}
-	
+
 	public void updateEnemy() {
-		
+
 		for (Enemy e: enemies) {
 			if(e.collidesWith(player) || player.collidesWith(e)) {
     			lives= lives-1;
@@ -61,18 +62,18 @@ public class GameModel {
     		}
 			e.update();
 		}
-				
-		
+
+
 	    //checks if 2 enemies collide
 	    for (int i=0; i<enemies.size();i++) {
-	    	
-	    	//checks if enemy collides with player first 
+
+	    	//checks if enemy collides with player first
 	    	Enemy a = enemies.get(i);
-    		
+
     		//checks if collides with player
 	    	for(int j=i+1; j<enemies.size();j++) {
 	    		Enemy b = enemies.get(j);
-	   
+
 	    		if(a.collidesWith(b)) {
 	    			System.out.println("Enemies collide.");
 	    			a.reverse();
@@ -80,10 +81,10 @@ public class GameModel {
 	    		}
 	    }
 	    	}
-	    	
-			};
-		
-	
+
+			}
+
+
 
 	//player updating and getting sticks
 	public void movePlayer(double dx, double dy) {
@@ -95,9 +96,14 @@ public class GameModel {
 				System.out.println("Got stick.");
 			}
 		}
-		
+		if(player.collidesWith(bone)) {
+			win = 1;
+			player.reset();
+			System.out.println("Got Bone!");
+		}
+
 		for(Walls w:walls) {
-			//checking for horizontal collisions 
+			//checking for horizontal collisions
 			double difference_x=w.getCol()-player.getCol();
 			if(Math.abs(difference_x)<=1 && w.getRow()==player.getRow()) {
 				System.out.println("Hit wall.");
@@ -110,9 +116,9 @@ public class GameModel {
 					System.out.println("Move backwards x="+player.getCol()+" "+"y="+player.getRow());
 				}
 				}
-			
+
 			//why do the upwards and downwards collisions work got through the forwards and backwards collisions?
-			//checking for vertical collisions 
+			//checking for vertical collisions
 			double difference_y=w.getRow()-player.getRow();
 			if(Math.abs(difference_y)<=1 && w.getCol()==player.getCol()) {
 				System.out.println("Hit wall vertically.");
@@ -127,13 +133,13 @@ public class GameModel {
 					System.out.println("Move upwards y="+player.getRow()+" "+" x="+player.getCol());
 				}
 			}
-			
+
 			}
 	}
-	
-	
-		
-	
+
+
+
+
 //	public void movePlayerDown() {
 //		player.moveBy(0, -1);
 //	}
@@ -143,7 +149,7 @@ public class GameModel {
 //	public void movePlayerRight() {
 //		player.moveBy(1, 0);
 //	}
-//	
+//
 	public void loadLevel(String filename) {
 		int row=0;
 		InputStream stream= GameModel.class.getResourceAsStream(filename);
@@ -155,7 +161,7 @@ public class GameModel {
 			String line = scanner.nextLine();
 			for (int col = 0; col < line.length(); col++) {
 	            char ch = line.charAt(col);
-	            
+
 	         //   System.out.println(ch);
 	            if (ch == 'P') {
 	            	player = new Player(row, col);
@@ -164,40 +170,44 @@ public class GameModel {
 	            if (ch == 'B') {
 	            	bone = new WinCondition(row, col);
 	                System.out.println("b="+col +" " +row);
-	            } 
+	            }
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
- 	               System.out.println(row+" "+col);  
+ 	               System.out.println(row+" "+col);
                 }
                 if (ch == 'S') {
  	                sticks.add(new Collectable(row,col));
- 	               System.out.println(row+" "+col); 
+ 	               System.out.println(row+" "+col);
                 }
                 if (ch == 'W') {
  	                walls.add(new Walls(row,col));
- 	               System.out.println("walls= "+row+" "+col); 
+ 	               System.out.println("walls= "+row+" "+col);
                 }
-			
+
 		}
 			row++;
 		}
 		scanner.close();
 		//throw new IllegalStateException("No P found in level file");
 	}
-	
+
 	public void draw( Graphics2D g2) {
 		if(player != null) {
 			player.drawOn(g2);
 		}
 		for(Enemy e: enemies) {
 			e.drawOn(g2);
-		}	
+		}
 		for(Collectable s: sticks) {
 			s.drawOn(g2);
-		}	
+		}
        for(Walls w: walls) {
     	   w.drawOn(g2);
 		}
+       if(bone != null) {
+			bone.drawOn(g2);
+		}
+       
 	}
 
 	//public int getTotalenemies() {
@@ -207,17 +217,17 @@ public class GameModel {
 	//public int getLostenemies() {
 	//	return lostenemies;
 	//}
-	
+
 	public boolean isGameWon() {
-		return sticks.isEmpty();
+		return win == 1;
 //				|| lives==0;
 	}
-	
+
 
 	public boolean isGameLost() {
 		return lives==0;
 	}
-	
+
 	public int getLives() {
 		return lives;
 	}
@@ -233,7 +243,7 @@ public class GameModel {
 	public int getCaughtsticks() {
 		return caughtsticks;
 	}
-	
+
 	public void reset() {
 		player.reset();
 		for(Enemy e: enemies) {
@@ -243,13 +253,13 @@ public class GameModel {
 		this.caughtsticks = 0;
 	    this.lives = 4;
 	}
-	
-	
-     
-		
-	
+
+
+
+
+
 }
-	
-	 
-	
-	
+
+
+
+
