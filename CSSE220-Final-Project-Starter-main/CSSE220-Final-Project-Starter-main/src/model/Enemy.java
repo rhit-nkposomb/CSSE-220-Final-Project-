@@ -121,6 +121,10 @@ public class Enemy implements Collideable{
 		dx=-dx;
 		dy=-dy;
 	}
+	public void reset() {
+		this.row = this.startRow;
+		this.col = this.startCol;
+	}
 	
 	
 	

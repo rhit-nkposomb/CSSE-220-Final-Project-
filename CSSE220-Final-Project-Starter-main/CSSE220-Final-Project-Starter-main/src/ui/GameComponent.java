@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ActionMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
@@ -28,10 +29,12 @@ public class GameComponent extends JComponent {
 	public static final int HEIGHT = 600;
 	private BufferedImage background;
 	private Timer timer;
+	private JButton reset;
+	private Runnable onReset;
 
 // set preferred size in 
 
-	public GameComponent(GameModel model) {
+	public GameComponent(GameModel model, Runnable onReset) {
 		this.model = model;
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setOpaque(true);
@@ -64,11 +67,20 @@ public class GameComponent extends JComponent {
 		}
 
 		);
+		
+		reset = new JButton("Restart");
+		reset.setBounds(150, 300, 100, 40); 
+	    reset.setVisible(false);
+	    reset.addActionListener(e -> onReset.run());
+	    this.add(reset);
 
 		timer = new Timer(500, e -> {
-			if(!model.isGameOver()) {
+			if(!model.isGameLost()&&!model.isGameWon()) {
 				model.updateEnemy();
-			}
+			}else {
+		        reset.setVisible(true);  
+		        stopTimer();             
+		    }
 			repaint();
 		});
 
@@ -77,6 +89,9 @@ public class GameComponent extends JComponent {
 	}
 	public void startTimer() {
 	    timer.start();
+	}
+	public void stopTimer() {
+	    timer.stop();
 	}
 	
 
@@ -89,12 +104,18 @@ public class GameComponent extends JComponent {
 		g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
 		if (background != null) {
 			g2.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
-			if(!model.isGameOver()) {
+			if(!model.isGameWon()||!model.isGameLost()) {
 				g2.drawString("Total Lives: " + model.getLives(),60, 60);
 				g2.drawString("Sticks caught: " + model.getCaughtsticks(),60, 100);
 			}
-			else {
-				g2.drawString("GAMMMMMMME OVEEEEEEEEEER !!!!!",100,70);
+			else if (model.isGameWon()) {
+				g2.drawString("You Won!",100,70);
+				g2.drawString("Score: " + model.getCaughtsticks(),100, 100);
+			}
+			
+			else if (model.isGameLost()) {
+				g2.drawString("You Lost.",100,70);
+				g2.drawString("Score: " + model.getCaughtsticks(),100, 90);
 			}
 				
 		

@@ -110,7 +110,6 @@ public class Player implements Collideable{
 
 	@Override
 	public boolean collidesWith(Collideable e) {
-		// TODO Auto-generated method stub
 		return this.getBounds().intersects(e.getBounds());
 		
 		
@@ -118,8 +117,6 @@ public class Player implements Collideable{
 		}
 	
 	public void reset() {
-		// TODO: Move the ball back to its original position
-		// Replace the current x with the original x
 		this.row = this.startRow;
 		this.col = this.startCol;
 	}

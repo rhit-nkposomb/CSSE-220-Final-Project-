@@ -203,8 +203,14 @@ public class GameModel {
 	//	return lostenemies;
 	//}
 	
-	public boolean isGameOver() {
-		return sticks.isEmpty() || lives==0;
+	public boolean isGameWon() {
+		return sticks.isEmpty();
+//				|| lives==0;
+	}
+	
+
+	public boolean isGameLost() {
+		return lives==0;
 	}
 	
 	public int getLives() {
@@ -221,6 +227,13 @@ public class GameModel {
 
 	public int getCaughtsticks() {
 		return caughtsticks;
+	}
+	
+	public void reset() {
+		player.reset();
+		for(Enemy e: enemies) {
+			e.reset();
+		}	
 	}
 	
 	
