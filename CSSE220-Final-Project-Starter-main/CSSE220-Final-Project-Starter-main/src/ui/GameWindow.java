@@ -26,7 +26,7 @@ public class GameWindow {
 		CardLayout cl = (CardLayout) cards.getLayout();
 		component = new GameComponent(this.model, () -> {
 	          cl.show(cards, "START");
-//	          model.reset();  
+	          model.reset();  
 	        }); 
 		cards.add(startPanel, "START");
 		cards.add(component, "GAME");

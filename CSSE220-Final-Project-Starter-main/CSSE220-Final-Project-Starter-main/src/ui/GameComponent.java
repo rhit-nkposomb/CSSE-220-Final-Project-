@@ -88,7 +88,8 @@ public class GameComponent extends JComponent {
 
 	}
 	public void startTimer() {
-	    timer.start();
+		reset.setVisible(false); 
+		timer.start();
 	}
 	public void stopTimer() {
 	    timer.stop();
@@ -104,7 +105,7 @@ public class GameComponent extends JComponent {
 		g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
 		if (background != null) {
 			g2.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
-			if(!model.isGameWon()||!model.isGameLost()) {
+			if(!model.isGameWon()&&!model.isGameLost()) {
 				g2.drawString("Total Lives: " + model.getLives(),60, 60);
 				g2.drawString("Sticks caught: " + model.getCaughtsticks(),60, 100);
 			}
