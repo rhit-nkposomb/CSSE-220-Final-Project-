@@ -19,6 +19,7 @@ public class GameModel {
 	public static final int TILE_SIZE = 40;
 
 	private Player player;
+	private WinCondition bone;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectable> sticks;
 	private ArrayList<Walls> walls;
@@ -159,6 +160,10 @@ public class GameModel {
 	            if (ch == 'P') {
 	            	player = new Player(row, col);
 	                System.out.println("p="+col +" " +row);
+	            }
+	            if (ch == 'B') {
+	            	bone = new WinCondition(row, col);
+	                System.out.println("b="+col +" " +row);
 	            } 
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
@@ -203,8 +208,14 @@ public class GameModel {
 	//	return lostenemies;
 	//}
 	
-	public boolean isGameOver() {
-		return sticks.isEmpty() || lives==0;
+	public boolean isGameWon() {
+		return sticks.isEmpty();
+//				|| lives==0;
+	}
+	
+
+	public boolean isGameLost() {
+		return lives==0;
 	}
 	
 	public int getLives() {
@@ -221,6 +232,16 @@ public class GameModel {
 
 	public int getCaughtsticks() {
 		return caughtsticks;
+	}
+	
+	public void reset() {
+		player.reset();
+		for(Enemy e: enemies) {
+			e.reset();
+		}
+		this.sticks = new ArrayList<>();
+		this.caughtsticks = 0;
+	    this.lives = 4;
 	}
 	
 	

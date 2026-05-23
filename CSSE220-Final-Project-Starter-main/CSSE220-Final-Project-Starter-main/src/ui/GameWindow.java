@@ -23,11 +23,14 @@ public class GameWindow {
 
 		JPanel cards = new JPanel(new CardLayout());
 		StartPanel startPanel = new StartPanel();
-		component = new GameComponent(this.model); // why not just put model here?
+		CardLayout cl = (CardLayout) cards.getLayout();
+		component = new GameComponent(this.model, () -> {
+	          cl.show(cards, "START");
+	          model.reset();  
+	        }); 
 		cards.add(startPanel, "START");
 		cards.add(component, "GAME");
 		frame.setContentPane(cards);
-		CardLayout cl = (CardLayout) cards.getLayout();
 		cl.show(cards, "START");
 		startPanel.getStartButton().addActionListener(e -> {
 			cl.show(cards, "GAME");
