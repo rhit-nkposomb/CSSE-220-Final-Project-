@@ -98,7 +98,8 @@ public class GameModel {
 		for(Walls w:walls) {
 			//checking for horizontal collisions 
 			double difference_x=w.getCol()-player.getCol();
-			if(Math.abs(difference_x)<=1 && w.getRow()==player.getRow()) {
+			double y_zone= w.getRow()-player.getRow(); //used to see if player is around/close to y coordinate as bush
+			if(Math.abs(difference_x)<=1 && Math.abs(y_zone)<=1.3) {
 				System.out.println("Hit wall.");
 				if(difference_x<0) {
 					player.setCol(w.getCol()+1.01); //why doesn't w.getCol+1.00 not work, does it conflict with previous condition?
@@ -110,19 +111,18 @@ public class GameModel {
 				}
 				}
 			
-			//why do the upwards and downwards collisions work got through the forwards and backwards collisions?
+			//Used Gemini 
 			//checking for vertical collisions 
 			double difference_y=w.getRow()-player.getRow();
-			if(Math.abs(difference_y)<=1 && w.getCol()==player.getCol()) {
+			double x_zone=w.getCol()-player.getCol();// used to see if the player is in about the same x coordinate as bush 
+			if(Math.abs(difference_y)<=1 && Math.abs(x_zone)<=1.3) {
 				System.out.println("Hit wall vertically.");
 				if(difference_y<0) {
 					player.setRow(w.getRow()+ 1.01);
-					//player.setCol(player.getCol());
 					System.out.println("Move downwards y= "+player.getRow()+" "+"x="+player.getCol());
 				}
 				if(difference_y>0) {
 					player.setRow(w.getRow()-1.01);
-					//player.setCol(player.getCol());
 					System.out.println("Move upwards y="+player.getRow()+" "+" x="+player.getCol());
 				}
 			}
