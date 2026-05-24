@@ -51,8 +51,8 @@ public class Walls implements Collideable {
 		return col;
 	}
 	
-	public Double getBounds() {
-		return new Double(x, y, TILE_SIZE, TILE_SIZE);
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
 	}
 	
 	@Override

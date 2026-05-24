@@ -56,8 +56,8 @@ public class Collectable implements Collideable {
 		}
 	}
 	
-	public Double getBounds() {
-		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
 		//return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
 	}
 	

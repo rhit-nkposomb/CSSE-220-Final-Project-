@@ -102,12 +102,12 @@ public class Enemy implements Collideable{
 	}
 	
 	
-	public Double getBounds() {
+	public Rectangle getBounds() {
 		//int newrow = this.row + dy;
 		//int newcol = this.col + dx;
 		int x = this.col * TILE_SIZE;
 		int y = this.row * TILE_SIZE;
-		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
+		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
 		//return new Rectangle(x,y,TILE_SIZE,TILE_SIZE);
 	}
 

@@ -12,12 +12,14 @@ import javax.imageio.ImageIO;
 import ui.GameComponent;
 
 public class Player implements Collideable{
-	private double row;
-	private double col;
+	private int row;
+	private int col;
 	private int startRow;
 	private int startCol;
-	private double x;
-	private double y;
+	private int x;
+	private int y;
+	private int dx;
+	private int dy;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	Walls w;
@@ -27,6 +29,7 @@ public class Player implements Collideable{
 		this.col = col;
 		this.startRow = row;
 		this.startCol = col;
+		
 		try {
 			sprite = ImageIO.read(Player.class.getResource("Player.png"));
 		} catch (IOException | IllegalArgumentException e) {
@@ -38,7 +41,7 @@ public class Player implements Collideable{
 		return row;
 	}
 
-	public void setRow(double row) {
+	public void setRow(int row) {
 		this.row = row;
 	}
 	
@@ -46,7 +49,7 @@ public class Player implements Collideable{
 		return col;
 	}
 
-	public void setCol(double col) {
+	public void setCol(int col) {
 		this.col = col;
 	}
 
@@ -69,9 +72,9 @@ public class Player implements Collideable{
 		}
 	}
 	
-	public void moveBy(double dx, double dy) {
-		double newrow = this.row;
-		double newcol = this.col;
+	public void moveBy(int dx, int dy) {
+		int newrow = this.row;
+		int newcol = this.col;
 		if (dy > 0) { //upwards
 			newrow = row - Math.abs(dy); 
 		}
@@ -96,6 +99,9 @@ public class Player implements Collideable{
 		if (this.row >= GameComponent.HEIGHT / TILE_SIZE) {this.row = GameComponent.HEIGHT / TILE_SIZE - 1;}
 		if (this.col >= GameComponent.WIDTH / TILE_SIZE) {this.col = GameComponent.WIDTH / TILE_SIZE - 1; }
 		if (this.col < 0 ) {this.col = 0; }
+		
+		this.x = this.col * TILE_SIZE;
+		this.y = this.row * TILE_SIZE;
 	}
 	
 	public void reverse(double dx, double dy) {
@@ -103,23 +109,17 @@ public class Player implements Collideable{
 		dy=-dy;
 	}
 	
-	public Rectangle2D.Double getBounds() { //Horizontal collisions
-		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
+	public Rectangle getBounds() { //Horizontal collisions
+		return new Rectangle (x, y, TILE_SIZE, TILE_SIZE);
 	}
+	
 
 	@Override
 	public boolean collidesWith(Collideable e) {
 		return this.getBounds().intersects(e.getBounds());
-		}
-	
-
-	public Rectangle2D.Double getBoundsvertical() { //Vertical collisions
-		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
 	}
 	
-	public boolean collidesWithvertical(Collideable e) {
-		return this.getBoundsvertical().intersects(e.getBounds());
-		}
+
 	
 	
 	public void reset() {

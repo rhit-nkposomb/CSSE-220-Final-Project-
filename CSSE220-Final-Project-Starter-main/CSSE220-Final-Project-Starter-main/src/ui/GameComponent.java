@@ -52,17 +52,18 @@ public class GameComponent extends JComponent {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
 					model.movePlayer(0,1);
-					repaint();
+					//repaint();
 				} else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
 					model.movePlayer(0,-1);
-					repaint();
+					//repaint();
 				} else if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
 					model.movePlayer(-1,0);
-					repaint();
+					//repaint();
 				} else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					model.movePlayer(1,0);
-					repaint();
+					//repaint();
 				}
+				repaint();
 			}
 		}
 

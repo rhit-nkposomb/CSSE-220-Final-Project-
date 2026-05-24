@@ -1,6 +1,8 @@
 package model;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D.Double;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,7 +21,7 @@ public class GameModel {
 	public static final int TILE_SIZE = 40;
 
 	private Player player;
-	//private WinCondition bone;
+	private WinCondition bone;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectable> sticks;
 	private ArrayList<Walls> walls;
@@ -84,10 +86,31 @@ public class GameModel {
 			};
 		
 	
-
+    
+			
+	public void wallscollisions(int dx, int dy) {
+//		Rectangle futurebounds= player.getFutureBounds(dx, dy);
+//		for(Walls w:walls) {
+//			if(futurebounds.intersects(w.getBounds())) {
+//				player.moveBy(0, 0);
+//			}
+//			else {
+//				player.moveBy(dx, dy);
+//			}
+//		}
+//		
+	}
 	//player updating and getting sticks
-	public void movePlayer(double dx, double dy) {
+	public void movePlayer(int dx, int dy) {
 		player.moveBy(dx, dy);
+		
+		for (Walls w : walls) {
+			if (player.collidesWith(w)) {
+				player.moveBy(-dx, -dy);
+				return;
+			}
+		}
+		
 		for(int k=sticks.size()-1; k>=0;k--) {
 			if(player.collidesWith(sticks.get(k))) {
 				sticks.remove(k);
@@ -95,38 +118,11 @@ public class GameModel {
 				System.out.println("Got stick.");
 			}
 		}
+	}
+			
 		
-		for(Walls w:walls) {
-			double difference_x=w.getCol()-player.getCol();
-			double difference_y=w.getRow()-player.getRow();
-			
-			if(Math.abs(difference_x)<=1 && difference_x>difference_y) {
-				if(Math.abs(difference_x)<=1 && difference_x<0) {
-					player.setCol(w.getCol()+1.02); //why doesn't w.getCol+1.00 not work, does it conflict with previous condition?
-					System.out.println("Move forward x="+player.getCol()+" "+"y="+player.getRow());
-				}
-				else if(Math.abs(difference_x)<=1 && difference_x>0) {
-					player.setCol(w.getCol()-1.02);
-					System.out.println("Move backwards x="+player.getCol()+" "+"y="+player.getRow());
-				}
-			}
-			else if(Math.abs(difference_y)<=1 && difference_y>difference_x){
-				if(Math.abs(difference_y)<=1 && difference_y<0) {
-					player.setRow(w.getRow()+1.02); //why doesn't w.getCol+1.00 not work, does it conflict with previous condition?
-					System.out.println("Move downwards x="+player.getCol()+" "+"y="+player.getRow());
-				}
-				else if(Math.abs(difference_y)<=1 && difference_y>0) {
-					player.setRow(w.getRow()-1.02);
-					System.out.println("Move upwards x="+player.getCol()+" "+"y="+player.getRow());
-				}
-			}
-				
-			}
-			
-			
-			
-			}
-		
+	
+
 	
 	
 	
@@ -159,10 +155,10 @@ public class GameModel {
 	            	player = new Player(row, col);
 	                System.out.println("p="+col +" " +row);
 	            }
-	          //  if (ch == 'B') {
-	           // 	bone = new WinCondition(row, col);
-	           //     System.out.println("b="+col +" " +row);
-	          //  } 
+	            if (ch == 'B') {
+	            	bone = new WinCondition(row, col);
+	                System.out.println("b="+col +" " +row);
+	            } 
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
  	               System.out.println(row+" "+col);  
@@ -179,6 +175,7 @@ public class GameModel {
 		}
 			row++;
 		}
+		
 		scanner.close();
 		//throw new IllegalStateException("No P found in level file");
 	}
