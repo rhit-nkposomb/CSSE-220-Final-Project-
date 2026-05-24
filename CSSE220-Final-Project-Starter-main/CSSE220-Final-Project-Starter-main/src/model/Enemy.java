@@ -13,7 +13,6 @@ import javax.imageio.ImageIO;
 import ui.GameComponent;
 
 public class Enemy implements Collideable{
-	//private int x, y;
 	private int row;
 	private int col;
 	private int startRow;
@@ -22,8 +21,6 @@ public class Enemy implements Collideable{
 	private static final int TILE_SIZE = 40;
 	int x;
 	int y;
-	//int x = this.col * TILE_SIZE;
-	//int y = this.row * TILE_SIZE;
 	BufferedImage sprite;
 
 	public Enemy(int row, int col) {
@@ -68,23 +65,19 @@ public class Enemy implements Collideable{
 
 
 	public void update() {
-//		x+=dx;
 		int newrow = this.row + dy;
 		int newcol = this.col + dx;
 //		 this.x += dx;
 //		 this.y += dy;
 //		 System.out.println("col:" + col);
 		 if (newcol <= 0) {
-
 			 this.col = 0;
 		        dx = -dx;
 		    }
 		 else if (newcol  >= GameComponent.WIDTH/TILE_SIZE) {
 			// System.out.println("Greater than 0");
 			 this.col = GameComponent.WIDTH/TILE_SIZE-1 ;
-//			 System.out.println(col);
-
-
+//			 System.out.println(col); 
 		        dx = -dx;
 		 }
 		 else if (newrow<= 0) {
@@ -96,7 +89,7 @@ public class Enemy implements Collideable{
 		        dy = -dy;
 	}
 		 else {
-			 this.row += dy;
+			 //this.row += dy;
 			 this.col += dx;
 		 }
 	}

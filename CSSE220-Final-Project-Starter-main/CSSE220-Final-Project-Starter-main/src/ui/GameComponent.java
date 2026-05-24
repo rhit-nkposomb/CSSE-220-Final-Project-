@@ -81,7 +81,7 @@ public class GameComponent extends JComponent {
 	    playAgain.addActionListener(e -> onReset.run());
 	    this.add(playAgain);
 
-		timer = new Timer(500, e -> {
+		timer = new Timer(800, e -> {
 			if(!model.isGameLost()&&!model.isGameWon()) {
 				model.updateEnemy();
 			}else if (model.isGameLost()) {

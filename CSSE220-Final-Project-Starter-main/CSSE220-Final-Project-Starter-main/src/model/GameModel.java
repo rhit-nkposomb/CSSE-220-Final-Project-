@@ -55,17 +55,6 @@ public class GameModel {
 	    }
 	    totalsticks=sticks.size();
 	}
-
-	//public Enemy getEnemy() {
-		//System.out.println(enemy.getRow());
-	//	return enemy;
-	//}
-
-	//public Player getPlayer() {
-		//System.out.println(player.getCol());
-	//	return player;
-	//}
-
 	public void updateEnemy() {
 
 		for (Enemy e: enemies) {
@@ -74,6 +63,12 @@ public class GameModel {
     			player.reset();
     			System.out.println("Got Player.");
     		}
+			for(Walls w:walls) {
+				if(e.collidesWith(w)) {
+					e.reverse();
+					return;
+				}
+			}
 			e.update();
 		}
 
@@ -125,17 +120,7 @@ public class GameModel {
 	}
 
 			
-		
-//	public void movePlayerDown() {
-//		player.moveBy(0, -1);
-//	}
-//	public void movePlayerLeft() {
-//		player.moveBy(-1, 0);
-//	}
-//	public void movePlayerRight() {
-//		player.moveBy(1, 0);
-//	}
-//
+
 	public void loadLevel(String filename) {
 		int row=0;
 		InputStream stream= GameModel.class.getResourceAsStream(filename);
@@ -148,10 +133,9 @@ public class GameModel {
 			for (int col = 0; col < line.length(); col++) {
 	            char ch = line.charAt(col);
 
-	         //   System.out.println(ch);
+	         
 	            if (ch == 'P') {
 	            	player = new Player(row, col);
-//	                System.out.println("p="+col +" " +row);
 	            }
 	            if (ch == 'B') {
 	            	bone = new WinCondition(row, col);
@@ -175,7 +159,6 @@ public class GameModel {
 		}
 		
 		scanner.close();
-		//throw new IllegalStateException("No P found in level file");
 	}
 
 	public void draw( Graphics2D g2) {
@@ -191,7 +174,7 @@ public class GameModel {
        for(Walls w: walls) {
     	   w.drawOn(g2);
 		}
-       if(bone != null) {
+       if(bone != null && sticks.size()==0) {
 			bone.drawOn(g2);
 		}
 
@@ -200,7 +183,6 @@ public class GameModel {
 	
 	public boolean isGameWon() {
 		return win == 1;
-//				|| lives==0;
 	}
 
 
