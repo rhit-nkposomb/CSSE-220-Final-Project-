@@ -27,6 +27,7 @@ public class GameModel {
 	private int caughtsticks;
 	private int win;
 	private int lives;
+	private int alltimesticks;
 
 
 	public GameModel() {
@@ -34,12 +35,27 @@ public class GameModel {
 		enemies= new ArrayList<>();
 		sticks = new ArrayList<>();
 		walls=new ArrayList <>();
-		loadLevel("level1.txt");
-		totalsticks=sticks.size();
+//		loadLevel("level1.txt");
+//		totalsticks=sticks.size();
+//		caughtsticks=0;
+//		lives=4;
+		init(1);
+
+	}
+	
+	public void init(int level) {
+		enemies.clear();
+		sticks.clear();
+		walls.clear();
 		caughtsticks=0;
 		lives=4;
-		
-
+		win = 0;
+	    if (level == 1) {
+	        loadLevel("level1.txt");
+	    } else if (level == 2) {
+	        loadLevel("level2.txt");
+	    }
+	    totalsticks=sticks.size();
 	}
 
 	//public Enemy getEnemy() {
@@ -93,6 +109,7 @@ public class GameModel {
 			if(player.collidesWith(sticks.get(k))) {
 				sticks.remove(k);
 				caughtsticks++;
+				alltimesticks++;
 				System.out.println("Got stick.");
 			}
 		}
@@ -117,17 +134,14 @@ public class GameModel {
 					System.out.println("Move backwards x="+player.getCol()+" "+"y="+player.getRow());
 				}
 				}
-<<<<<<< HEAD
 
 			//why do the upwards and downwards collisions work got through the forwards and backwards collisions?
 			//checking for vertical collisions
-=======
-			
-			//Used Gemini 
-			//checking for vertical collisions 
->>>>>>> cd90e9df776cacba5e593fc2a585000dfd871bff
+
+			//Used Gemini
+			//checking for vertical collisions
 			double difference_y=w.getRow()-player.getRow();
-			double x_zone=w.getCol()-player.getCol();// used to see if the player is in about the same x coordinate as bush 
+			double x_zone=w.getCol()-player.getCol();// used to see if the player is in about the same x coordinate as bush
 			if(Math.abs(difference_y)<=1 && Math.abs(x_zone)<=1.3) {
 				System.out.println("Hit wall vertically.");
 				if(difference_y<0) {
@@ -213,7 +227,7 @@ public class GameModel {
        if(bone != null) {
 			bone.drawOn(g2);
 		}
-       
+
 	}
 
 	//public int getTotalenemies() {
@@ -250,14 +264,16 @@ public class GameModel {
 		return caughtsticks;
 	}
 
+	public int getAllSticks() {
+		return alltimesticks;
+	}
+
 	public void reset() {
-		player.reset();
-		for(Enemy e: enemies) {
-			e.reset();
-		}
-		this.sticks = new ArrayList<>();
-		this.caughtsticks = 0;
-	    this.lives = 4;
+		alltimesticks = 0;
+		init(1);
+	}
+	public void nextLevel() {
+		init(2);
 	}
 
 

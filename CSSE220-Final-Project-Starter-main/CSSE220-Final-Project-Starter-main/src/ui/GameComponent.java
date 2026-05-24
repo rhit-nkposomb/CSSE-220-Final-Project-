@@ -28,7 +28,9 @@ public class GameComponent extends JComponent {
 	private BufferedImage background;
 	private Timer timer;
 	private JButton reset;
+	private JButton playAgain;
 	private Runnable onReset;
+	private int currentlevel;
 
 // set preferred size in
 
@@ -71,14 +73,29 @@ public class GameComponent extends JComponent {
 	    reset.setVisible(false);
 	    reset.addActionListener(e -> onReset.run());
 	    this.add(reset);
+	    
+	    playAgain = new JButton("Play Again");
+		playAgain.setBounds(150, 300, 100, 40);
+	    playAgain.setVisible(false);
+	    playAgain.addActionListener(e -> onReset.run());
+	    this.add(playAgain);
 
 		timer = new Timer(500, e -> {
 			if(!model.isGameLost()&&!model.isGameWon()) {
 				model.updateEnemy();
-			}else {
+			}else if (model.isGameLost()) {
 		        reset.setVisible(true);
 		        stopTimer();
+		    }else if (model.isGameWon()) {
+		    	currentlevel += 1;
+		    	if (currentlevel < 2) {
+		    		model.nextLevel();
+		    	}
+		    	else {
+		    		stopTimer();
+		    		playAgain.setVisible(true);}
 		    }
+			
 			repaint();
 		});
 
@@ -86,7 +103,9 @@ public class GameComponent extends JComponent {
 
 	}
 	public void startTimer() {
+		currentlevel = 0;
 		reset.setVisible(false);
+		playAgain.setVisible(false);
 		timer.start();
 	}
 	public void stopTimer() {
@@ -108,8 +127,14 @@ public class GameComponent extends JComponent {
 				g2.drawString("Sticks caught: " + model.getCaughtsticks(),60, 100);
 			}
 			else if (model.isGameWon()) {
+				if (currentlevel == 2) {
+					g2.drawString("You Beat the Game!", 150, 290);
+					g2.drawString("Highscore: " + model.getAllSticks(), 150, 360);
+				}
+				else {
 				g2.drawString("You Won!",100,70);
 				g2.drawString("Score: " + model.getCaughtsticks(),100, 100);
+				}
 			}
 
 			else if (model.isGameLost()) {
