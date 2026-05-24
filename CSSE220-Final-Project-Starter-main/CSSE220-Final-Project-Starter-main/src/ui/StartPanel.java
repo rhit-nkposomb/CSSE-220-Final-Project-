@@ -28,7 +28,7 @@ public class StartPanel extends JPanel {
 		}
 
 		label = new JLabel("Welcome to Puppy Simulator!", SwingConstants.CENTER);
-		label2 = new JLabel("Collect Sticks and Don't Get Caught!", SwingConstants.CENTER);
+		label2 = new JLabel("Collect the Bone to Escape, and Don't Get Caught!", SwingConstants.CENTER);
 		label.setForeground(Color.BLACK);
 		label.setFont(new Font("Serif", Font.BOLD, 18));
 		label2.setForeground(Color.BLACK);
