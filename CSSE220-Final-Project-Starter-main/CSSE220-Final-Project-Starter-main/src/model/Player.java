@@ -18,8 +18,6 @@ public class Player implements Collideable{
 	private int startCol;
 	private double x;
 	private double y;
-	private int dx;
-	private int dy;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	Walls w;
@@ -29,8 +27,6 @@ public class Player implements Collideable{
 		this.col = col;
 		this.startRow = row;
 		this.startCol = col;
-		this.dx=10;
-		this.dy=10;
 		try {
 			sprite = ImageIO.read(Player.class.getResource("Player.png"));
 		} catch (IOException | IllegalArgumentException e) {
@@ -69,28 +65,29 @@ public class Player implements Collideable{
 			g2.setColor(Color.MAGENTA);
 			g2.fillRect((int)x, (int)y, TILE_SIZE, TILE_SIZE);
 			g2.draw(getBounds());
+			
 		}
 	}
 	
 	public void moveBy(double dx, double dy) {
 		double newrow = this.row;
 		double newcol = this.col;
-		if (dy > 0) {
-			//System.out.println("Moving?"); for upwards movement
+		if (dy > 0) { //upwards
 			newrow = row - Math.abs(dy); 
 		}
-		else if (dy < 0) {
+		else if (dy < 0) {//downwards 
 			newrow = row + Math.abs(dy);
 		}
-		if (dx > 0) {
+		if (dx > 0) { //forwards 
 			newcol = col + Math.abs(dx);
 //			if (this.col >= GameComponent.WIDTH/TILE_SIZE) {this.col = GameComponent.WIDTH/TILE_SIZE;}
 		}
-		else if (dx < 0) {
+		else if (dx < 0) {//backwards
 			newcol = col - Math.abs(dx);
 //			if (this.col <= 0 ) {this.col = 0;}
 		}
-			
+		
+				
 		this.col = newcol; 
 		this.row = newrow;
 		
@@ -99,27 +96,37 @@ public class Player implements Collideable{
 		if (this.row >= GameComponent.HEIGHT / TILE_SIZE) {this.row = GameComponent.HEIGHT / TILE_SIZE - 1;}
 		if (this.col >= GameComponent.WIDTH / TILE_SIZE) {this.col = GameComponent.WIDTH / TILE_SIZE - 1; }
 		if (this.col < 0 ) {this.col = 0; }
-		
-		
 	}
 	
-	public Rectangle2D.Double getBounds() {
+	public void reverse(double dx, double dy) {
+		dx=-dx;
+		dy=-dy;
+	}
+	
+	public Rectangle2D.Double getBounds() { //Horizontal collisions
 		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
-		
 	}
 
 	@Override
 	public boolean collidesWith(Collideable e) {
 		return this.getBounds().intersects(e.getBounds());
-		
-		
-		
 		}
+	
+
+	public Rectangle2D.Double getBoundsvertical() { //Vertical collisions
+		return new Rectangle2D.Double(x, y, TILE_SIZE, TILE_SIZE);
+	}
+	
+	public boolean collidesWithvertical(Collideable e) {
+		return this.getBoundsvertical().intersects(e.getBounds());
+		}
+	
 	
 	public void reset() {
 		this.row = this.startRow;
 		this.col = this.startCol;
 	}
+	
 	
 	
 	

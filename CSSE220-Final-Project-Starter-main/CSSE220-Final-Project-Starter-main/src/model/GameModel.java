@@ -19,7 +19,7 @@ public class GameModel {
 	public static final int TILE_SIZE = 40;
 
 	private Player player;
-	private WinCondition bone;
+	//private WinCondition bone;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Collectable> sticks;
 	private ArrayList<Walls> walls;
@@ -97,39 +97,37 @@ public class GameModel {
 		}
 		
 		for(Walls w:walls) {
-			//checking for horizontal collisions 
 			double difference_x=w.getCol()-player.getCol();
-			double y_zone= w.getRow()-player.getRow(); //used to see if player is around/close to y coordinate as bush
-			if(Math.abs(difference_x)<=1 && Math.abs(y_zone)<=1.3) {
-				System.out.println("Hit wall.");
-				if(difference_x<0) {
-					player.setCol(w.getCol()+1.01); //why doesn't w.getCol+1.00 not work, does it conflict with previous condition?
+			double difference_y=w.getRow()-player.getRow();
+			
+			if(Math.abs(difference_x)<=1 && difference_x>difference_y) {
+				if(Math.abs(difference_x)<=1 && difference_x<0) {
+					player.setCol(w.getCol()+1.02); //why doesn't w.getCol+1.00 not work, does it conflict with previous condition?
 					System.out.println("Move forward x="+player.getCol()+" "+"y="+player.getRow());
 				}
-				if(difference_x>0 && difference_x<=1) {
-					player.setCol(w.getCol()-1.01);
+				else if(Math.abs(difference_x)<=1 && difference_x>0) {
+					player.setCol(w.getCol()-1.02);
 					System.out.println("Move backwards x="+player.getCol()+" "+"y="+player.getRow());
 				}
+			}
+			else if(Math.abs(difference_y)<=1 && difference_y>difference_x){
+				if(Math.abs(difference_y)<=1 && difference_y<0) {
+					player.setRow(w.getRow()+1.02); //why doesn't w.getCol+1.00 not work, does it conflict with previous condition?
+					System.out.println("Move downwards x="+player.getCol()+" "+"y="+player.getRow());
 				}
-			
-			//Used Gemini 
-			//checking for vertical collisions 
-			double difference_y=w.getRow()-player.getRow();
-			double x_zone=w.getCol()-player.getCol();// used to see if the player is in about the same x coordinate as bush 
-			if(Math.abs(difference_y)<=1 && Math.abs(x_zone)<=1.3) {
-				System.out.println("Hit wall vertically.");
-				if(difference_y<0) {
-					player.setRow(w.getRow()+ 1.01);
-					System.out.println("Move downwards y= "+player.getRow()+" "+"x="+player.getCol());
-				}
-				if(difference_y>0) {
-					player.setRow(w.getRow()-1.01);
-					System.out.println("Move upwards y="+player.getRow()+" "+" x="+player.getCol());
+				else if(Math.abs(difference_y)<=1 && difference_y>0) {
+					player.setRow(w.getRow()-1.02);
+					System.out.println("Move upwards x="+player.getCol()+" "+"y="+player.getRow());
 				}
 			}
+				
+			}
+			
+			
 			
 			}
-	}
+		
+	
 	
 	
 		
@@ -161,10 +159,10 @@ public class GameModel {
 	            	player = new Player(row, col);
 	                System.out.println("p="+col +" " +row);
 	            }
-	            if (ch == 'B') {
-	            	bone = new WinCondition(row, col);
-	                System.out.println("b="+col +" " +row);
-	            } 
+	          //  if (ch == 'B') {
+	           // 	bone = new WinCondition(row, col);
+	           //     System.out.println("b="+col +" " +row);
+	          //  } 
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
  	               System.out.println(row+" "+col);  
