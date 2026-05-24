@@ -23,7 +23,7 @@ public class Player implements Collideable{
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
 	Walls w;
-	
+
 	public Player(int row, int col) {
 		this.row = row;
 		this.col = col;
@@ -44,7 +44,7 @@ public class Player implements Collideable{
 	public void setRow(int row) {
 		this.row = row;
 	}
-	
+
 	public double getCol() {
 		return col;
 	}
@@ -53,12 +53,12 @@ public class Player implements Collideable{
 		this.col = col;
 	}
 
-	
-	
+
+
 	public void drawOn(Graphics2D g2) {
 		this.x = this.col * TILE_SIZE;
 		this.y = this.row * TILE_SIZE;
-		
+
 		if (sprite!= null) {
 		g2.drawImage(sprite, (int)x,(int)y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.RED);
@@ -88,12 +88,10 @@ public class Player implements Collideable{
 		else if (dx < 0) {//backwards
 			newcol = col - Math.abs(dx);
 //			if (this.col <= 0 ) {this.col = 0;}
-		}
-		
-				
+		}		
 		this.col = newcol; 
 		this.row = newrow;
-		
+
 		//second check
 		if (this.row < 0) {this.row = 0;}
 		if (this.row >= GameComponent.HEIGHT / TILE_SIZE) {this.row = GameComponent.HEIGHT / TILE_SIZE - 1;}
@@ -107,29 +105,29 @@ public class Player implements Collideable{
 	public void reverse(double dx, double dy) {
 		dx=-dx;
 		dy=-dy;
+
+
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		return new Rectangle (x, y, TILE_SIZE, TILE_SIZE);
+
 	}
 	
-	public Rectangle getBounds() { //Horizontal collisions
-		return new Rectangle (x, y, TILE_SIZE, TILE_SIZE);
-	}
 	
 
 	@Override
 	public boolean collidesWith(Collideable e) {
 		return this.getBounds().intersects(e.getBounds());
 	}
-	
 
-	
-	
+
+
+
 	public void reset() {
 		this.row = this.startRow;
 		this.col = this.startCol;
 	}
-	
-	
-	
-	
-	
-	
+
 }

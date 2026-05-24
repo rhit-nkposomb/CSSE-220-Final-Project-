@@ -17,7 +17,7 @@ public class WinCondition implements Collideable {
 	private int y;
 	private static final int TILE_SIZE = 40;
 	BufferedImage sprite;
-	
+
 	public WinCondition(int row, int col) {
 		this.row = row;
 		this.col = col;
@@ -37,11 +37,11 @@ public class WinCondition implements Collideable {
 	public int getCol() {
 		return col;
 	}
-	
+
 	public void drawOn(Graphics2D g2) {
 		this.x = this.col * TILE_SIZE;
 		this.y = this.row * TILE_SIZE;
-		
+
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
 		g2.setColor(Color.BLUE);
@@ -53,15 +53,14 @@ public class WinCondition implements Collideable {
 			g2.draw(getBounds());
 		}
 	}
-	
+
+	@Override
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
-		//return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
-	}
-	
+ }
+
 	@Override
 	public boolean collidesWith(Collideable e) {
-		// TODO Auto-generated method stub
 		return this.getBounds().intersects(e.getBounds());
 	}
 }

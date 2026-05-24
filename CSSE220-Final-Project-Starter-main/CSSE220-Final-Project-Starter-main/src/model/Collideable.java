@@ -6,6 +6,6 @@ import java.awt.geom.Rectangle2D.Double;
 public interface Collideable {
 	boolean collidesWith(Collideable other); 
 	Rectangle getBounds();
-	
+
 
 }
