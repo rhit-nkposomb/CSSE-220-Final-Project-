@@ -51,8 +51,8 @@ public class Enemy implements Collideable{
 
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
-		g2.setColor(Color.CYAN);
-		g2.draw(getBounds());
+		//g2.setColor(Color.CYAN);
+		//g2.draw(getBounds());
 
 		}
 		else {
@@ -67,17 +67,12 @@ public class Enemy implements Collideable{
 	public void update() {
 		int newrow = this.row + dy;
 		int newcol = this.col + dx;
-//		 this.x += dx;
-//		 this.y += dy;
-//		 System.out.println("col:" + col);
 		 if (newcol <= 0) {
 			 this.col = 0;
 		        dx = -dx;
 		    }
 		 else if (newcol  >= GameComponent.WIDTH/TILE_SIZE) {
-			// System.out.println("Greater than 0");
 			 this.col = GameComponent.WIDTH/TILE_SIZE-1 ;
-//			 System.out.println(col); 
 		        dx = -dx;
 		 }
 		 else if (newrow<= 0) {
@@ -92,6 +87,9 @@ public class Enemy implements Collideable{
 			 //this.row += dy;
 			 this.col += dx;
 		 }
+		 
+		int x = this.col * TILE_SIZE;
+		int y = this.row * TILE_SIZE;
 	}
 
 
@@ -100,7 +98,6 @@ public class Enemy implements Collideable{
 		int x = this.col * TILE_SIZE;
 		int y = this.row * TILE_SIZE;
 		return new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
-		//return new Rectangle(x,y,TILE_SIZE,TILE_SIZE);
 	}
 
 	@Override
@@ -112,6 +109,9 @@ public class Enemy implements Collideable{
 	public void reverse() {
 		dx=-dx;
 		dy=-dy;
+		this.update();
+		return;
+		//dy=-dy;
 	}
 	public void reset() {
 		this.row = this.startRow;

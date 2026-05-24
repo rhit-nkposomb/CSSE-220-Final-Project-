@@ -42,8 +42,8 @@ public class Collectable implements Collideable {
 
 		if (sprite!= null) {
 		g2.drawImage(sprite, x,y,TILE_SIZE,TILE_SIZE,null);
-		g2.setColor(Color.YELLOW);
-		g2.draw(getBounds());
+		//g2.setColor(Color.YELLOW);
+		//g2.draw(getBounds());
 		}
 		else {
 			g2.setColor(Color.MAGENTA);

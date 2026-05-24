@@ -61,8 +61,8 @@ public class Player implements Collideable{
 
 		if (sprite!= null) {
 		g2.drawImage(sprite, (int)x,(int)y,TILE_SIZE,TILE_SIZE,null);
-		g2.setColor(Color.RED);
-		g2.draw(getBounds());
+		//g2.setColor(Color.RED);
+		//g2.draw(getBounds());
 		}
 		else {
 			g2.setColor(Color.MAGENTA);
@@ -71,6 +71,7 @@ public class Player implements Collideable{
 			
 		}
 	}
+	
 	
 	public void moveBy(int dx, int dy) {
 		int newrow = this.row;
@@ -115,15 +116,10 @@ public class Player implements Collideable{
 
 	}
 	
-	
-
 	@Override
 	public boolean collidesWith(Collideable e) {
 		return this.getBounds().intersects(e.getBounds());
 	}
-
-
-
 
 	public void reset() {
 		this.row = this.startRow;

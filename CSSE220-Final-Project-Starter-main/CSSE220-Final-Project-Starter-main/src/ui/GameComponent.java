@@ -124,8 +124,9 @@ public class GameComponent extends JComponent {
 		if (background != null) {
 			g2.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
 			if(!model.isGameWon()&&!model.isGameLost()) {
-				g2.drawString("Total Lives: " + model.getLives(),60, 60);
-				g2.drawString("Sticks caught: " + model.getCaughtsticks(),60, 100);
+				g2.drawString("Total Lives: " + model.getLives(),30, 10);
+				g2.getFont();
+				g2.drawString("Sticks caught: " + model.getCaughtsticks(),110, 10);
 			}
 			else if (model.isGameWon()) {
 				if (currentlevel == 2) {
@@ -133,14 +134,14 @@ public class GameComponent extends JComponent {
 					g2.drawString("Highscore: " + model.getAllSticks(), 150, 360);
 				}
 				else {
-				g2.drawString("You Won!",100,70);
-				g2.drawString("Score: " + model.getCaughtsticks(),100, 100);
+				g2.drawString("You Won!",30,10);
+				g2.drawString("Score: " + model.getCaughtsticks(),110, 10);
 				}
 			}
 
 			else if (model.isGameLost()) {
-				g2.drawString("You Lost.",100,70);
-				g2.drawString("Score: " + model.getCaughtsticks(),100, 90);
+				g2.drawString("You Lost.",30,70);
+				g2.drawString("Score: " + model.getCaughtsticks(),110, 90);
 			}
 
 

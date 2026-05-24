@@ -58,17 +58,19 @@ public class GameModel {
 	public void updateEnemy() {
 
 		for (Enemy e: enemies) {
-			if(e.collidesWith(player) || player.collidesWith(e)) {
-    			lives= lives-1;
-    			player.reset();
-    			System.out.println("Got Player.");
-    		}
 			for(Walls w:walls) {
 				if(e.collidesWith(w)) {
 					e.reverse();
 					return;
 				}
 			}
+			
+			if(e.collidesWith(player) || player.collidesWith(e)) {
+    			lives= lives-1;
+    			player.reset();
+    			System.out.println("Got Player.");
+    		}
+			
 			e.update();
 		}
 
