@@ -185,23 +185,23 @@ public class GameModel {
 	         //   System.out.println(ch);
 	            if (ch == 'P') {
 	            	player = new Player(row, col);
-	                System.out.println("p="+col +" " +row);
+//	                System.out.println("p="+col +" " +row);
 	            }
 	            if (ch == 'B') {
 	            	bone = new WinCondition(row, col);
-	                System.out.println("b="+col +" " +row);
+//	                System.out.println("b="+col +" " +row);
 	            }
                 if (ch == 'E') {
  	                enemies.add(new Enemy(row,col));
- 	               System.out.println(row+" "+col);
+// 	               System.out.println(row+" "+col);
                 }
                 if (ch == 'S') {
  	                sticks.add(new Collectable(row,col));
- 	               System.out.println(row+" "+col);
+// 	               System.out.println(row+" "+col);
                 }
                 if (ch == 'W') {
  	                walls.add(new Walls(row,col));
- 	               System.out.println("walls= "+row+" "+col);
+// 	               System.out.println("walls= "+row+" "+col);
                 }
 
 		}
